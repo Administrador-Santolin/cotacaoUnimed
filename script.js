@@ -1,7 +1,7 @@
 // script.js
 
 // Importa os dados da planilha de um arquivo separado
-import { planData } from 'data.js';
+import { planData } from 'planData.js';
 
 // Mapeamento para exibir nomes amigáveis para os tipos de equipe
 const equipeNames = {
