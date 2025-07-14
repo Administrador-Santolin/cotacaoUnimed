@@ -1,0 +1,46 @@
+/* style.css */
+
+/* Custom font for better aesthetics */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Base styling for elements, mostly handled by Tailwind, but good for custom touches */
+.form-container {
+    /* Tailwind classes handle most of this */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+/* Estilo para o datalist, se necessário */
+datalist {
+    /* Pode ser estilizado, mas o navegador controla a maioria dos aspectos */
+}
+
+/* Adicionando um pouco de transição para os campos de input/select no foco */
+input:focus, select:focus {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Estilo para o botão de cotação */
+#cotar-button {
+    /* Tailwind classes já dão um bom estilo */
+}
+
+/* Estilo para a área de resultado */
+#resultado {
+    /* Tailwind classes já dão um bom estilo */
+}
+
+/* Estilo para a caixa de mensagem */
+#message-box {
+    /* Tailwind classes já dão um bom estilo */
+}
