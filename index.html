@@ -1,101 +1,111 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Cotação de Plano</title>
     <link rel="icon" href="./assets/icon.png">
-    <!-- Tailwind CSS CDN para estilização rápida e responsiva -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Link para o seu arquivo CSS personalizado, se houver -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4 font-inter">
     <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-2xl">
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Cotação de Plano de Importância Segurada</h1>
 
         <div class="space-y-6">
-            <!-- Seleção do Tipo de Equipe como Radio Buttons Estilizados -->
             <div>
                 <label class="block text-lg font-medium text-gray-700 mb-2">
                     Selecione o Tipo de Equipe:
                 </label>
                 <div id="equipe-options" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Radio buttons serão gerados dinamicamente via JavaScript ou adicionados aqui -->
-                    <!-- Exemplo de estrutura para um radio button estilizado -->
-                    <label class="equipe-option flex items-center justify-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-600 has-[:checked]:ring-2 has-[:checked]:ring-blue-600">
+                    <label
+                        class="equipe-option flex items-center justify-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-600 has-[:checked]:ring-2 has-[:checked]:ring-blue-600">
                         <input type="radio" name="equipe" value="sem_chefe_sem_diretor_clinico" class="hidden">
-                        <span class="text-lg font-medium text-gray-800 text-center">Sem Chefe de Equipe e Sem Diretor Clínico</span>
+                        <span class="text-lg font-medium text-gray-800 text-center">Sem Chefe de Equipe e Sem Diretor
+                            Clínico</span>
                     </label>
-                    <label class="equipe-option flex items-center justify-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-600 has-[:checked]:ring-2 has-[:checked]:ring-blue-600">
+                    <label
+                        class="equipe-option flex items-center justify-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-600 has-[:checked]:ring-2 has-[:checked]:ring-blue-600">
                         <input type="radio" name="equipe" value="com_chefe_sem_diretor_clinico" class="hidden">
-                        <span class="text-lg font-medium text-gray-800 text-center">Com Chefe de Equipe e Sem Diretor Clínico</span>
+                        <span class="text-lg font-medium text-gray-800 text-center">Com Chefe de Equipe e Sem Diretor
+                            Clínico</span>
                     </label>
-                    <label class="equipe-option flex items-center justify-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-600 has-[:checked]:ring-2 has-[:checked]:ring-blue-600">
+                    <label
+                        class="equipe-option flex items-center justify-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-600 has-[:checked]:ring-2 has-[:checked]:ring-blue-600">
                         <input type="radio" name="equipe" value="sem_chefe_com_diretor_clinico" class="hidden">
-                        <span class="text-lg font-medium text-gray-800 text-center">Sem Chefe de Equipe e Com Diretor Clínico</span>
+                        <span class="text-lg font-medium text-gray-800 text-center">Sem Chefe de Equipe e Com Diretor
+                            Clínico</span>
                     </label>
-                    <label class="equipe-option flex items-center justify-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-600 has-[:checked]:ring-2 has-[:checked]:ring-blue-600">
+                    <label
+                        class="equipe-option flex items-center justify-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-600 has-[:checked]:ring-2 has-[:checked]:ring-blue-600">
                         <input type="radio" name="equipe" value="com_chefe_com_diretor_clinico" class="hidden">
-                        <span class="text-lg font-medium text-gray-800 text-center">Com Chefe de Equipe e Com Diretor Clínico</span>
+                        <span class="text-lg font-medium text-gray-800 text-center">Com Chefe de Equipe e Com Diretor
+                            Clínico</span>
                     </label>
                 </div>
             </div>
 
-            <!-- Seleção do Grupo (Especialidade) como Radio Buttons Estilizados -->
             <div>
                 <label class="block text-lg font-medium text-gray-700 mb-2">
                     Selecione o Grupo / Especialidade:
                 </label>
                 <div id="grupo-options" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <label class="grupo-option flex items-center justify-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-600 has-[:checked]:ring-2 has-[:checked]:ring-blue-600">
+                    <label
+                        class="grupo-option flex items-center justify-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-600 has-[:checked]:ring-2 has-[:checked]:ring-blue-600">
                         <input type="radio" name="grupo" value="G2" class="hidden">
                         <span class="text-lg font-medium text-gray-800 text-center">G2 (Farmácia sem Estética)</span>
                     </label>
-                    <label class="grupo-option flex items-center justify-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-600 has-[:checked]:ring-2 has-[:checked]:ring-blue-600">
+                    <label
+                        class="grupo-option flex items-center justify-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:bg-blue-50 hover:border-blue-500 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-600 has-[:checked]:ring-2 has-[:checked]:ring-blue-600">
                         <input type="radio" name="grupo" value="G5" class="hidden">
                         <span class="text-lg font-medium text-gray-800 text-center">G5 (Farmácia com Estética)</span>
                     </label>
                 </div>
             </div>
 
-            <!-- Slider para Importância Segurada -->
             <div>
                 <label for="importancia-slider" class="block text-lg font-medium text-gray-700 mb-2">
-                    Importância Segurada: <span id="importancia-display" class="font-bold text-blue-600">R$ 100.000,00</span>
+                    Importância Segurada: <span id="importancia-display" class="font-bold text-blue-600">R$
+                        100.000,00</span>
                 </label>
                 <input type="range" id="importancia-slider"
-                       class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg accent-blue-600"
-                       min="100000" max="1000000" step="50000">
+                    class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg accent-blue-600"
+                    min="100000" max="1000000" step="50000">
             </div>
 
-            <!-- Botão de Cotação -->
             <button id="cotar-button"
-                    class="w-full flex justify-center py-3 px-6 border border-transparent rounded-md shadow-sm text-xl font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-105">
+                class="w-full flex justify-center py-3 px-6 border border-transparent rounded-md shadow-sm text-xl font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-105">
                 Cotar
             </button>
 
-            <!-- Área de Resultado -->
-            <div id="resultado" class="mt-8 p-6 bg-blue-50 border border-blue-200 rounded-lg shadow-inner text-gray-800 hidden">
+            <div id="resultado"
+                class="mt-8 p-6 bg-blue-50 border border-blue-200 rounded-lg shadow-inner text-gray-800 hidden">
                 <h2 class="text-2xl font-bold text-blue-700 mb-4">Resultado da Cotação:</h2>
                 <p class="text-lg mb-2"><strong class="text-blue-600">Grupo:</strong> <span id="res-grupo"></span></p>
-                <p class="text-lg mb-2"><strong class="text-blue-600">Especialidade:</strong> <span id="res-especialidade"></span></p>
-                <p class="text-lg mb-2"><strong class="text-blue-600">Importância Segurada:</strong> <span id="res-importancia"></span></p>
-                <p class="text-lg mb-2"><strong class="text-blue-600">Tipo de Equipe:</strong> <span id="res-equipe"></span></p>
-                <p class="text-2xl font-bold text-green-700 mt-4"><strong class="text-blue-600">Prêmio Total Anual:</strong> <span id="res-premio"></span></p>
-                <p class="text-lg mb-2"><strong class="text-blue-600">Parcelamento Máximo:</strong> <span id="res-parcelamento"></span></p>
-                <p class="text-lg"><strong class="text-blue-600">Condição de Parcela Mínima:</strong> <span id="res-condicao"></span></p>
+                <p class="text-lg mb-2"><strong class="text-blue-600">Especialidade:</strong> <span
+                        id="res-especialidade"></span></p>
+                <p class="text-lg mb-2"><strong class="text-blue-600">Importância Segurada:</strong> <span
+                        id="res-importancia"></span></p>
+                <p class="text-lg mb-2"><strong class="text-blue-600">Tipo de Equipe:</strong> <span
+                        id="res-equipe"></span></p>
+                <p class="text-2xl font-bold text-green-700 mt-4"><strong class="text-blue-600">Prêmio Total
+                        Anual:</strong> <span id="res-premio"></span></p>
+                <p class="text-lg mb-2"><strong class="text-blue-600">Parcelamento Máximo:</strong> <span
+                        id="res-parcelamento"></span></p>
+                <p class="text-lg"><strong class="text-blue-600">Condição de Parcela Mínima:</strong> <span
+                        id="res-condicao"></span></p>
             </div>
 
-            <!-- Área de Mensagens (para erros ou avisos) -->
-            <div id="message-box" class="mt-4 p-4 bg-yellow-100 border border-yellow-400 text-yellow-800 rounded-md hidden">
-                <!-- Mensagens de erro ou aviso serão exibidas aqui -->
+            <div id="message-box"
+                class="mt-4 p-4 bg-yellow-100 border border-yellow-400 text-yellow-800 rounded-md hidden">
             </div>
         </div>
     </div>
 
-    <!-- Seu arquivo JavaScript -->
     <script src="script.js" type="module"></script>
 </body>
+
 </html>
