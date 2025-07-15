@@ -10,13 +10,56 @@ body {
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-legend{
+legend {
     padding: 8px !important;
     border-bottom: 1px solid lightgrey;
     width: 100%;
 }
 
-.card-option{
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 28px;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 24px;
+
+    &::before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+        transform: translatey(25%);
+    }
+
+    &::after {
+        position: absolute;
+        content: "Não";
+        top: 50%;
+        transform: translateY(-50%);
+        transition: 0.5s all;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        right: 8px;
+    }
+}
+
+.card-option {
     border: 1px solid #dce0e6;
     padding: 15px;
     border-radius: 8px;
@@ -26,11 +69,12 @@ legend{
     font-size: 14px;
     position: relative;
     transition: all 0.2s ease;
+
     &.selected {
-            border: 2px solid #217867ff;
-            background-color: #eaf1fd;
-            font-weight: bold;
-            color: #217867ff;
+        border: 2px solid #217867ff;
+        background-color: #eaf1fd;
+        font-weight: bold;
+        color: #217867ff;
     }
 }
 
@@ -49,10 +93,12 @@ fieldset {
     display: none;
 }
 
-.input-container{
+.input-container {
     transition: all .3s ease-in-out;
-    &:focus-within label{
-        color: #007bff;;
+
+    &:focus-within label {
+        color: #007bff;
+        ;
     }
 }
 
@@ -63,8 +109,10 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 input[type="text"],
-input[type="number"],input[type="email"],
-input[type="tel"], input[type="date"]{
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="date"] {
     width: 100%;
     padding: 4px;
     border: none;
@@ -83,18 +131,15 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
-datalist {
-}
+datalist {}
 
-input:focus, select:focus {
+input:focus,
+select:focus {
     transition: all 0.2s ease-in-out;
 }
 
-#cotar-button {
-}
+#cotar-button {}
 
-#resultado {
-}
+#resultado {}
 
-#message-box {
-}
+#message-box {}
