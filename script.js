@@ -242,6 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formPessoal.classList.add('hidden');
             formEmpresarial.classList.remove('hidden');
         }
+        document.querySelector('input[name="tipo_cotacao"]').closest('.card-option').classList.remove('selected');
         document.querySelector('input[name="tipo_cotacao"]:checked').closest('.card-option').classList.add('selected');
         console.log('Tipo de cotação selecionado:', selectedType);
     }
