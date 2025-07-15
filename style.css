@@ -11,6 +11,24 @@ legend{
     width: 100%;
 }
 
+.card-option{
+    border: 1px solid #dce0e6;
+    padding: 15px;
+    border-radius: 8px;
+    background: #f7f8fa;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    position: relative;
+    transition: all 0.2s ease;
+    &.selected {
+            border: 2px solid #217867ff;
+            background-color: #eaf1fd;
+            font-weight: bold;
+            color: #217867ff;
+    }
+}
+
 fieldset {
     margin: 0;
     padding: 18px 6px !important;
@@ -22,7 +40,7 @@ fieldset {
     gap: 18px;
 }
 
-hidden {
+.hidden {
     display: none;
 }
 
