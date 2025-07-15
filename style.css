@@ -59,6 +59,20 @@ legend {
     }
 }
 
+.switch input[type="checkbox"]:checked+.slider::after {
+  content: "Sim";
+  left: 8px;
+  top: 50%;
+}
+
+.switch input[type="checkbox"]:checked+.slider::before {
+  transform: translate(33px, 25%);
+}
+
+.switch input[type="checkbox"]:checked+.slider {
+  background-color: #217867ff;
+}
+
 .card-option {
     border: 1px solid #dce0e6;
     padding: 15px;
