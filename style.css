@@ -22,6 +22,10 @@ fieldset {
     gap: 18px;
 }
 
+hidden {
+    display: none;
+}
+
 .input-container{
     transition: all .3s ease-in-out;
     &:focus-within label{
@@ -37,7 +41,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="text"],
 input[type="number"],input[type="email"],
-input[type="tel"]{
+input[type="tel"], input[type="date"]{
     width: 100%;
     padding: 4px;
     border: none;
