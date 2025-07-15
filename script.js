@@ -242,6 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formPessoal.classList.add('hidden');
             formEmpresarial.classList.remove('hidden');
         }
+        selectedType.classList.add('selected');
         console.log('Tipo de cotação selecionado:', selectedType);
     }
 
