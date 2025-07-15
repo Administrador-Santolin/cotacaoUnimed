@@ -5,11 +5,45 @@ body {
 .form-container {
 }
 
+legend{
+    padding: 8px;
+    border-bottom: 1px solid lightgrey;
+    width: 100%;
+}
+
+fieldset {
+    margin: 0;
+    padding: 18px 6px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    gap: 18px;
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+input[type="text"],
+input[type="number"],input[type="email"],
+input[type="tel"]{
+    width: 100%;
+    padding: 4px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    transition: all .3s ease-in-out;
+
+    &:focus {
+        border-bottom: 2px solid #007bff;
+    }
+}
+
+
 
 input[type="number"] {
     -moz-appearance: textfield;

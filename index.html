@@ -8,6 +8,7 @@
     <!-- Tailwind CSS CDN para estilização rápida e responsiva -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Link para o seu arquivo CSS personalizado, se houver -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,15 +16,6 @@
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4 font-inter">
     <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-2xl">
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Cotação de Plano de Importância Segurada</h1>
-
-        <div id="personalForm">
-
-        </div>
-
-        <div id="businessForm" class="hidden">
-
-
-        </div>
 
         <!-- Seleção do Tipo de Cotação -->
         <section class="mb-8">
@@ -53,15 +45,14 @@
                     <legend>Dados do Segurado:</legend>
 
                     <div>
-                        <label for="personalName" class="block text-lg font-medium text-gray-700 mb-2">Nome do
-                            Segurado:</label>
+                        <label for="personalName" class="block text-lg font-medium text-gray-700 mb-2">Nome:</label>
                         <input type="text" id="personalName" name="personalName"
                             class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
                             required>
                     </div>
 
                     <div>
-                        <label for="cpf" class="block text-lg font-medium text-gray-700 mb-2">CPF do Segurado:</label>
+                        <label for="cpf" class="block text-lg font-medium text-gray-700 mb-2">CPF:</label>
                         <input type="text" id="cpf" name="cpf"
                             class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
                             required>
@@ -98,22 +89,22 @@
                     </div>
 
                     <div>
-                        <label for="addressComplement"></label>
+                        <label for="addressComplement">Complemento:</label>
                         <input type="text" id="addressComplement" name="addressComplement">
                     </div>
 
                     <div>
-                        <label for="neighborhood"></label>
+                        <label for="neighborhood">Bairro:</label>
                         <input type="text" id="neighborhood" name="neighborhood">
                     </div>
 
                     <div>
-                        <label for="city"></label>
+                        <label for="city">Cidade:</label>
                         <input type="text" id="city" name="city">
                     </div>
 
                     <div>
-                        <label for="state"></label>
+                        <label for="state">Estado:</label>
                         <input type="text" id="state" name="state">
                     </div>
                 </fieldset>
@@ -237,7 +228,7 @@
                     </div>
 
                     <div>
-                        <label for="CNPJ"></label>
+                        <label for="CNPJ">CNPJ:</label>
                         <input type="text" name="CNPJ" id="CNPJ">
                     </div>
 
@@ -279,22 +270,22 @@
                     </div>
 
                     <div>
-                        <label for="addressComplement"></label>
+                        <label for="addressComplement">Complemento:</label>
                         <input type="text" id="addressComplement" name="addressComplement">
                     </div>
 
                     <div>
-                        <label for="neighborhood"></label>
+                        <label for="neighborhood">Bairro:</label>
                         <input type="text" id="neighborhood" name="neighborhood">
                     </div>
 
                     <div>
-                        <label for="city"></label>
+                        <label for="city">Cidade:</label>
                         <input type="text" id="city" name="city">
                     </div>
 
                     <div>
-                        <label for="state"></label>
+                        <label for="state">Estado:</label>
                         <input type="text" id="state" name="state">
                     </div>
 
@@ -410,6 +401,9 @@
 
     <!-- Seu arquivo JavaScript -->
     <script src="script.js" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>
