@@ -103,8 +103,6 @@ fieldset {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    align-content: flex-start;
-    align-items: flex-start;
     gap: 18px;
 }
 
