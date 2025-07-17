@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+    }
     // --- Lógica do Formulário Pessoal ---
     function setupImportanciaSliderPessoal() {
         const importanciasSet = new Set(planData.map(item => item.importancia_segurada));
