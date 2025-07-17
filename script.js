@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const formSteps = document.querySelectorAll('.form-step');
     const prevButton = document.getElementById('prev-button');
     const nextButton = document.getElementById('next-button');
-    const messageBox = document.getElementById('message-box');
     const editCotacaoButton = document.getElementById('edit-cotacao-button');
 
     // Elementos do Passo 1 (Tipo de Cotação)
