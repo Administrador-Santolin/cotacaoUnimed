@@ -202,6 +202,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return value;
     }
 
+    function applyCepMask(value) {
+        value = value.replace(/\D/g, ""); // Remove tudo que não é dígito
+        if (value.length > 5) {
+            value = value.replace(/^(\d{5})(\d{3}).*/, "$1-$2");
+        }
+        return value;
+    }
+
     // --- Integração ViaCEP ---
 
     async function fetchAddressByCep(cepInput, enderecoInput, bairroInput, cidadeInput, estadoInput) {
@@ -596,6 +604,8 @@ document.addEventListener('DOMContentLoaded', () => {
     cnpjEmpresarialInput.addEventListener('input', (e) => e.target.value = applyCnpjMask(e.target.value));
     telefonePessoalInput.addEventListener('input', (e) => e.target.value = applyPhoneMask(e.target.value));
     telefoneEmpresarialInput.addEventListener('input', (e) => e.target.value = applyPhoneMask(e.target.value));
+    cepPessoalInput.addEventListener('input', (e) => e.target.value = applyCepMask(e.target.value));
+    cepEmpresarialInput.addEventListener('input', (e) => e.target.value = applyCepMask(e.target.value));
 
     // Adiciona listeners para busca de CEP
     cepPessoalInput.addEventListener('blur', () => fetchAddressByCep(cepPessoalInput, enderecoPessoalInput, bairroPessoalInput, cidadePessoalInput, estadoPessoalInput));
