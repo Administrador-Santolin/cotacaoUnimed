@@ -99,6 +99,28 @@ document.addEventListener('DOMContentLoaded', () => {
         return (diffToLower <= diffToUpper) ? lowerBound : upperBound;
     }
 
+
+    function setupRadioSelection(radioGroupName, optionClass) {
+        const radios = document.querySelectorAll(`input[name="${radioGroupName}"]`);
+        radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                // Remove a classe 'selected' de todas as opções no grupo
+                radios.forEach(otherRadio => {
+                    const parentLabel = otherRadio.closest(`.${optionClass}`);
+                    if (parentLabel) {
+                        parentLabel.classList.remove('selected');
+                    }
+                });
+
+                // Adiciona a classe 'selected' apenas à opção selecionada
+                if (radio.checked) {
+                    const parentLabel = radio.closest(`.${optionClass}`);
+                    if (parentLabel) {
+                        parentLabel.classList.add('selected');
+                    }
+                }
+            });
+        });
     // --- Lógica do Formulário Pessoal ---
     function setupImportanciaSliderPessoal() {
         const importanciasSet = new Set(planData.map(item => item.importancia_segurada));
@@ -243,18 +265,28 @@ document.addEventListener('DOMContentLoaded', () => {
             formEmpresarial.classList.remove('hidden');
         }
         console.log('Tipo de cotação selecionado:', selectedType);
+
     }
+
+    // Cotação Pessoal
+    setupRadioSelection('equipe_pessoal', 'card-option');
+    setupRadioSelection('grupo_pessoal', 'card-option');
+
+    // Cotação Empresarial
+    setupRadioSelection('tipo_cotacao', 'card-option'); // Para alternar entre Pessoal/Empresarial
+    setupRadioSelection('grupo_empresarial', 'card-option'); // Assumindo que você usou 'grupo-option' ou similar
+    setupRadioSelection('profissionais_empresarial', 'card-option');
 
     // Adiciona listeners para os radio buttons de tipo de cotação
     tipoCotacaoRadios.forEach(radio => {
         radio.addEventListener('change', toggleFormVisibility);
         radio.addEventListener('change', () => {
-            tipoCotacaoRadios.forEach( opcao => {
+            tipoCotacaoRadios.forEach(opcao => {
                 opcao.closest('.card-option').classList.remove('selected');
             });
-        if (radio,checked){
-            radio.closest('.card-option').classList.add('selected');
-        }
+            if (radio.checked) {
+                radio.closest('.card-option').classList.add('selected');
+            }
         });
     });
 
