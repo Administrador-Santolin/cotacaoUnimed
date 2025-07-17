@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     editCotacaoButton.addEventListener('click', () => {
-        currentStep = 0; // Volta para o primeiro passo para edição
+        currentStep = 2; // Volta para o primeiro passo para edição
         showStep(currentStep);
         // Não reseta os inputs aqui, apenas permite a edição.
         // O reset acontece apenas se o tipo de cotação for alterado no Passo 1.
