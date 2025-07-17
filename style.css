@@ -525,6 +525,12 @@ legend {
     width: 100%;
 }
 
+.toggleGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .switch {
     position: relative;
     display: inline-block;
@@ -585,6 +591,11 @@ legend {
 
 .switch input[type="checkbox"]:checked+.slider {
   background-color: #007bff;
+}
+
+.cardsContainer {
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .card-option {
