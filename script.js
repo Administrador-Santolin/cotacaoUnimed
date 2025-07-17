@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Elementos do Passo 2 (Dados Pessoais/Empresariais)
     const formDadosPessoais = document.getElementById('personalForm');
     const formDadosEmpresariais = document.getElementById('businessForm');
-    const nomePessoalInput = document.getElementById('nome');
+    const nomePessoalInput = document.getElementById('personalName');
     const cpfPessoalInput = document.getElementById('cpf');
     const razaoSocialEmpresarialInput = document.getElementById('businessName');
     const cnpjEmpresarialInput = document.getElementById('CNPJ');
