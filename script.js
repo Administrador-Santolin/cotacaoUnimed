@@ -242,14 +242,20 @@ document.addEventListener('DOMContentLoaded', () => {
             formPessoal.classList.add('hidden');
             formEmpresarial.classList.remove('hidden');
         }
-        document.querySelector('input[name="tipo_cotacao"]').closest('.card-option').classList.remove('selected');
-        document.querySelector('input[name="tipo_cotacao"]:checked').closest('.card-option').classList.add('selected');
         console.log('Tipo de cotação selecionado:', selectedType);
     }
 
     // Adiciona listeners para os radio buttons de tipo de cotação
     tipoCotacaoRadios.forEach(radio => {
         radio.addEventListener('change', toggleFormVisibility);
+        radio.addEventListener('change', () => {
+            tipoCotacaoRadios.forEach( opcao => {
+                opcao.closest('.card-option').classList.remove('selected');
+            });
+        if (radio,checked){
+            radio.closest('.card-option').classList.add('selected');
+        }
+        });
     });
 
     // Inicializa o formulário correto ao carregar a página
