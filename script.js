@@ -591,4 +591,24 @@ document.addEventListener('DOMContentLoaded', () => {
     showStep(currentStep);
     setupImportanciaSliderPessoal(); // Inicializa o slider pessoal
     setupLMGSliderEmpresarial(); // Inicializa o slider empresarial
+
+    cpfPessoalInput.addEventListener('input', (e) => e.target.value = applyCpfMask(e.target.value));
+    cnpjEmpresarialInput.addEventListener('input', (e) => e.target.value = applyCnpjMask(e.target.value));
+    telefonePessoalInput.addEventListener('input', (e) => e.target.value = applyPhoneMask(e.target.value));
+    telefoneEmpresarialInput.addEventListener('input', (e) => e.target.value = applyPhoneMask(e.target.value));
+
+    // Adiciona listeners para busca de CEP
+    cepPessoalInput.addEventListener('blur', () => fetchAddressByCep(cepPessoalInput, enderecoPessoalInput, bairroPessoalInput, cidadePessoalInput, estadoPessoalInput));
+    cepPessoalInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+            fetchAddressByCep(cepPessoalInput, enderecoPessoalInput, bairroPessoalInput, cidadePessoalInput, estadoPessoalInput);
+        }
+    });
+
+    cepEmpresarialInput.addEventListener('blur', () => fetchAddressByCep(cepEmpresarialInput, enderecoEmpresarialInput, bairroEmpresarialInput, cidadeEmpresarialInput, estadoEmpresarialInput));
+    cepEmpresarialInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+            fetchAddressByCep(cepEmpresarialInput, enderecoEmpresarialInput, bairroEmpresarialInput, cidadeEmpresarialInput, estadoEmpresarialInput);
+        }
+    });
 });
