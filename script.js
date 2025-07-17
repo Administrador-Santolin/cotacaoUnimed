@@ -56,8 +56,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const formDadosEmpresariais = document.getElementById('businessForm');
     const nomePessoalInput = document.getElementById('personalName');
     const cpfPessoalInput = document.getElementById('cpf');
+    const telefonePessoalInput = document.getElementById('personalNumber');
+    const cepPessoalInput = document.getElementById('personalCep');
+    const enderecoPessoalInput = document.getElementById('personalAddress');
+    const numeroPessoalInput = document.getElementById('addressNumber');
+    const complementoPessoalInput = document.getElementById('addressComplement');
+    const bairroPessoalInput = document.getElementById('neighborhood');
+    const cidadePessoalInput = document.getElementById('city');
+    const estadoPessoalInput = document.getElementById('state');
+
     const razaoSocialEmpresarialInput = document.getElementById('businessName');
     const cnpjEmpresarialInput = document.getElementById('CNPJ');
+    const telefoneEmpresarialInput = document.getElementById('businessTel');
+    const cepEmpresarialInput = document.getElementById('businessCep');
+    const enderecoEmpresarialInput = document.getElementById('businessAddress');
+    const numeroEmpresarialInput = document.getElementById('businessAddNumber');
+    const complementoEmpresarialInput = document.getElementById('businessAddComplement');
+    const bairroEmpresarialInput = document.getElementById('businessNeighborhood');
+    const cidadeEmpresarialInput = document.getElementById('businessCity');
+    const estadoEmpresarialInput = document.getElementById('businessState');
 
     // Elementos do Passo 3 (Detalhes da Cotação)
     const formCotacaoPessoal = document.getElementById('professionalInfo');
@@ -145,6 +162,100 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+    }
+
+    function applyCpfMask(value) {
+        value = value.replace(/\D/g, ""); // Remove tudo que não é dígito
+        if (value.length > 9) {
+            value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, "$1.$2.$3-$4");
+        } else if (value.length > 6) {
+            value = value.replace(/^(\d{3})(\d{3})(\d{3}).*/, "$1.$2.$3");
+        } else if (value.length > 3) {
+            value = value.replace(/^(\d{3})(\d{3}).*/, "$1.$2");
+        }
+        return value;
+    }
+
+    function applyCnpjMask(value) {
+        value = value.replace(/\D/g, ""); // Remove tudo que não é dígito
+        if (value.length > 12) {
+            value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2}).*/, "$1.$2.$3/$4-$5");
+        } else if (value.length > 8) {
+            value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4}).*/, "$1.$2.$3/$4");
+        } else if (value.length > 5) {
+            value = value.replace(/^(\d{2})(\d{3})(\d{3}).*/, "$1.$2.$3");
+        } else if (value.length > 2) {
+            value = value.replace(/^(\d{2})(\d{3}).*/, "$1.$2");
+        }
+        return value;
+    }
+
+    function applyPhoneMask(value) {
+        value = value.replace(/\D/g, ""); // Remove tudo que não é dígito
+        if (value.length > 10) { // (XX) XXXXX-XXXX (11 dígitos)
+            value = value.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+        } else if (value.length > 5) { // (XX) XXXX-XXXX (10 dígitos) ou (XX) XXXX-XXXX (9 dígitos)
+            value = value.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+        } else if (value.length > 2) { // (XX)
+            value = value.replace(/^(\d\d)(\d{0,5}).*/, "($1) $2");
+        }
+        return value;
+    }
+
+    // --- Integração ViaCEP ---
+
+    async function fetchAddressByCep(cepInput, enderecoInput, bairroInput, cidadeInput, estadoInput) {
+        const cep = cepInput.value.replace(/\D/g, ''); // Limpa o CEP
+
+        // Limpa campos de endereço enquanto busca
+        enderecoInput.value = '';
+        bairroInput.value = '';
+        cidadeInput.value = '';
+        estadoInput.value = '';
+
+        if (cep.length !== 8) {
+            // showMessage('CEP inválido. Por favor, digite 8 dígitos.', 'warning');
+            return; // Não busca se o CEP não tem 8 dígitos
+        }
+
+        try {
+            // Desabilita campos para evitar edição durante a busca
+            enderecoInput.readOnly = true;
+            bairroInput.readOnly = true;
+            cidadeInput.readOnly = true;
+            estadoInput.readOnly = true;
+
+            const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+            const data = await response.json();
+
+            if (data.erro) {
+                showMessage('CEP não encontrado. Verifique o número digitado.', 'error');
+                enderecoInput.readOnly = false; // Permite edição manual se não encontrado
+                bairroInput.readOnly = false;
+                cidadeInput.readOnly = false;
+                estadoInput.readOnly = false;
+            } else {
+                enderecoInput.value = data.logradouro || '';
+                bairroInput.value = data.bairro || '';
+                cidadeInput.value = data.localidade || '';
+                estadoInput.value = data.uf || '';
+
+                // Habilita campos para edição manual apenas se estiverem vazios após a busca
+                if (!data.logradouro) enderecoInput.readOnly = false;
+                if (!data.bairro) bairroInput.readOnly = false;
+                if (!data.localidade) cidadeInput.readOnly = false;
+                if (!data.uf) estadoInput.readOnly = false;
+                hideMessage(); // Esconde mensagem de erro se a busca foi bem-sucedida
+            }
+        } catch (error) {
+            console.error('Erro ao buscar CEP:', error);
+            showMessage('Erro ao buscar CEP. Tente novamente mais tarde.', 'error');
+            // Em caso de erro na API, permite edição manual
+            enderecoInput.readOnly = false;
+            bairroInput.readOnly = false;
+            cidadeInput.readOnly = false;
+            estadoInput.readOnly = false;
+        }
     }
 
     function updateStepperUI() {
