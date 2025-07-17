@@ -585,12 +585,6 @@ legend {
   top: 50%;
 }
 
-.grid-2{
-    display: grid;
-    gap: 20px;
-    grid-template-columns: 1fr 1fr;
-}
-
 .switch input[type="checkbox"]:checked+.slider::before {
   transform: translate(33px, 25%);
 }
@@ -600,9 +594,10 @@ legend {
 }
 
 .cardsContainer {
-    display: flex;
+    display: grid;
     justify-content: space-evenly;
-    gap: 6px
+    gap: 6px;
+    grid-template-columns: 1fr 1fr;
 }
 
 .card-option {
