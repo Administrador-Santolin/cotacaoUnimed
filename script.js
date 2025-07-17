@@ -30,7 +30,10 @@ const profissionaisNamesEmpresarial = {
     "de_11_a_20_profissionais": "De 11 até 20 Profissionais",
     "de_21_a_30_profissionais": "De 21 até 30 Profissionais",
     "de_31_a_50_profissionais": "De 31 até 50 Profissionais"
-};
+}
+
+let currentStep = 0;
+const totalSteps = 4;;
 
 
 document.addEventListener('DOMContentLoaded', () => {
