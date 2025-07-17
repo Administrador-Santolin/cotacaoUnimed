@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('res-premio-pessoal-resumo').textContent = cota.premio_total_ano.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 document.getElementById('res-parcelamento-pessoal-resumo').textContent = cota.parcelamento_maximo_meses;
                 document.getElementById('res-condicao-pessoal-resumo').textContent = cota.parcela_minima_condicao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                resultadoPessoalResumoDiv.classList.remove('hidden');
+                resultadoPessoalDiv.classList.remove('hidden');
             } else {
                 showMessage('Não foi possível gerar o resumo da Cotação Pessoal. Verifique os dados preenchidos.', 'error');
             }
@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('res-lmg-empresarial-resumo').textContent = selectedLMGEmpresarial.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 document.getElementById('res-premio-empresarial-resumo').textContent = foundItem.premio_a_vista.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 document.getElementById('res-franquia-empresarial-resumo').textContent = foundFranquia ? foundFranquia.franquia_texto : 'Não disponível';
-                resultadoEmpresarialResumoDiv.classList.remove('hidden');
+                resultadoEmpresarialDiv.classList.remove('hidden');
             } else {
                 showMessage('Não foi possível gerar o resumo da Cotação Empresarial. Verifique os dados preenchidos.', 'error');
             }
