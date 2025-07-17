@@ -1,13 +1,516 @@
 body {
     font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6; /* Cor de fundo similar ao gray-100 do Tailwind */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1rem; /* p-4 */
+    margin: 0;
 }
 
 .form-container {
-    border-radius: 16px;
-    width: 90%;
-    margin: 0 auto;
-    padding: 18px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    background-color: #ffffff;
+    padding: 2rem; /* p-8 */
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-2xl */
+    width: 100%;
+    max-width: 64rem; /* max-w-4xl */
+}
+
+.main-title {
+    font-size: 2.25rem; /* text-3xl */
+    font-weight: 700; /* font-bold */
+    text-align: center;
+    color: #1f2937; /* gray-800 */
+    margin-bottom: 2rem; /* mb-8 */
+}
+
+.step-title {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 700; /* font-bold */
+    text-align: center;
+    color: #374151; /* gray-700 */
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+
+.form-group {
+    margin-bottom: 1.5rem; /* space-y-6 */
+}
+
+.form-label {
+    display: block;
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 500; /* font-medium */
+    color: #374151; /* gray-700 */
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.form-field {
+    margin-bottom: 1rem; /* mb-4 */
+}
+
+.input-label {
+    display: block;
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    color: #374151; /* gray-700 */
+}
+
+.input-field {
+    margin-top: 0.25rem; /* mt-1 */
+    display: block;
+    width: 100%;
+    border-radius: 0.375rem; /* rounded-md */
+    border: 1px solid #d1d5db; /* border-gray-300 */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+    padding: 0.5rem 0.75rem; /* p-2 */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.input-field:focus {
+    border-color: #3b82f6; /* focus:border-blue-500 */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* focus:ring-blue-500 */
+    outline: none;
+}
+
+/* Specific colors for personal and empresarial sections */
+.personal-color {
+    color: #2563eb; /* blue-600 */
+}
+
+.empresarial-color {
+    color: #16a34a; /* green-600 */
+}
+
+.personal-strong {
+    color: #2563eb; /* blue-600 */
+}
+
+.empresarial-strong {
+    color: #16a34a; /* green-600 */
+}
+
+/* Hidden class */
+.hidden {
+    display: none !important;
+}
+
+/* --- Stepper Styles --- */
+.stepper-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+    position: relative;
+}
+
+.stepper-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #d1d5db;
+    transform: translateY(-50%);
+    z-index: -1;
+}
+
+.stepper-step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    flex: 1;
+}
+
+.stepper-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #d1d5db;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.125rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    border: 2px solid #d1d5db;
+}
+
+.stepper-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}
+
+/* Active Step */
+.stepper-step-item.active .stepper-circle {
+    background-color: #3b82f6; /* blue-600 */
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+}
+
+.stepper-step-item.active .stepper-label {
+    color: #1f2937; /* gray-900 */
+    font-weight: 600; /* semibold */
+}
+
+/* Completed Step */
+.stepper-step-item.completed .stepper-circle {
+    background-color: #10b981; /* green-500 */
+    border-color: #10b981;
+}
+
+.stepper-step-item.completed .stepper-label {
+    color: #1f2937; /* gray-900 */
+}
+
+/* --- Form Step Containers --- */
+.form-step {
+    border: 1px solid #e5e7eb; /* gray-200 */
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.form-section {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.section-subtitle {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 700; /* font-bold */
+    margin-bottom: 1rem; /* mb-4 */
+}
+
+/* --- Radio Button Custom Styles --- */
+.radio-group {
+    display: grid;
+    grid-template-columns: 1fr; /* Default for mobile */
+    gap: 1rem; /* gap-4 */
+}
+
+@media (min-width: 768px) { /* md breakpoint */
+    .radio-group {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .radio-group.three-cols { /* Specific for 3 columns in empresarial group */
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.radio-option {
+    border: 2px solid #d1d5db; /* border-gray-300 */
+    border-radius: 0.5rem; /* rounded-lg */
+    padding: 1rem; /* p-4 */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.radio-option:hover {
+    background-color: #eff6ff; /* blue-50 */
+    border-color: #3b82f6; /* blue-500 */
+}
+
+.radio-option .hidden {
+    /* Esconde o input radio nativo */
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.radio-option .radio-label {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 500; /* font-medium */
+    color: #1f2937; /* gray-800 */
+    text-align: center;
+}
+
+/* Estilo para a opção selecionada (adicionada via JavaScript) */
+.radio-option.selected {
+    background-color: #e0f2fe; /* blue-100 */
+    border-color: #2563eb; /* blue-600 */
+    box-shadow: 0 0 0 2px #2563eb; /* ring-2, ring-blue-600 */
+}
+
+/* Ajustes para cores específicas de formulário empresarial (radio options) */
+#form-cotacao-empresarial .radio-option.selected {
+    background-color: #dcfce7; /* green-100 */
+    border-color: #16a34a; /* green-600 */
+    box-shadow: 0 0 0 2px #16a34a;
+}
+
+/* --- Slider Custom Styles --- */
+.slider-input {
+    width: 100%;
+    height: 0.75rem; /* h-3 */
+    background-color: #e5e7eb; /* bg-gray-200 */
+    border-radius: 0.5rem; /* rounded-lg */
+    appearance: none; /* Remove default browser styling */
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+    margin-top: 0.5rem;
+}
+
+/* Thumb (o "círculo" que você arrasta) */
+.slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px; /* Maior para facilitar o toque */
+    height: 24px;
+    border-radius: 50%;
+    background-color: #3b82f6; /* accent-blue-600 */
+    border: 3px solid #ffffff; /* Borda branca */
+    cursor: grab;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.slider-input::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #3b82f6; /* accent-blue-600 */
+    border: 3px solid #ffffff;
+    cursor: grab;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.slider-input:active::-webkit-slider-thumb,
+.slider-input:focus::-webkit-slider-thumb {
+    background-color: #2563eb; /* blue-700 */
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.4); /* Anel de foco mais pronunciado */
+}
+
+.slider-input:active::-moz-range-thumb,
+.slider-input:focus::-moz-range-thumb {
+    background-color: #2563eb; /* blue-700 */
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.4);
+}
+
+/* Slider track */
+.slider-input::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 0.75rem;
+    background-color: #e5e7eb;
+    border-radius: 0.5rem;
+}
+
+.slider-input::-moz-range-track {
+    width: 100%;
+    height: 0.75rem;
+    background-color: #e5e7eb;
+    border-radius: 0.5rem;
+}
+
+/* Specific colors for sliders */
+.personal-slider::-webkit-slider-thumb,
+.personal-slider::-moz-range-thumb {
+    background-color: #3b82f6; /* blue-600 */
+}
+
+.empresarial-slider::-webkit-slider-thumb,
+.empresarial-slider::-moz-range-thumb {
+    background-color: #10b981; /* green-600 */
+}
+
+
+.slider-display {
+    font-weight: 700; /* font-bold */
+}
+
+/* --- Navigation Buttons --- */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem; /* mt-8 */
+}
+
+.button-primary,
+.button-secondary,
+.button-edit {
+    padding: 0.75rem 1.5rem; /* py-3 px-6 */
+    border: 1px solid transparent;
+    border-radius: 0.375rem; /* rounded-md */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-semibold */
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    flex-grow: 1; /* Para ocupar o espaço disponível */
+}
+
+.button-primary {
+    color: #ffffff;
+    background: linear-gradient(to right, #2563eb, #1d4ed8); /* from-blue-600 to-blue-800 */
+}
+
+.button-primary:hover {
+    background: linear-gradient(to right, #1d4ed8, #1e40af); /* hover:from-blue-700 hover:to-blue-900 */
+    transform: scale(1.02); /* hover:scale-105 */
+}
+
+.button-primary:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5); /* focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 */
+}
+
+.button-secondary {
+    color: #374151; /* gray-700 */
+    background-color: #e5e7eb; /* gray-200 */
+    margin-right: 1rem; /* Adjust spacing if both are visible */
+}
+
+.button-secondary:hover {
+    background-color: #d1d5db; /* gray-300 */
+    transform: scale(1.02);
+}
+
+.button-secondary:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(107, 114, 128, 0.5); /* focus:ring-gray-500 */
+}
+
+.button-edit {
+    color: #ffffff;
+    background-color: #4b5563; /* gray-600 */
+    margin-top: 1.5rem; /* mt-6 */
+}
+
+.button-edit:hover {
+    background-color: #374151; /* gray-700 */
+    transform: scale(1.02);
+}
+
+.button-edit:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(75, 85, 99, 0.5); /* focus:ring-gray-500 */
+}
+
+/* Adjust button spacing when only one is visible */
+.navigation-buttons .button-primary:last-child:not(:first-child) {
+    margin-left: auto; /* ml-auto */
+}
+
+/* --- Result Box Styles --- */
+.result-box {
+    margin-top: 2rem; /* mt-8 */
+    padding: 1.5rem; /* p-6 */
+    border: 1px solid;
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-inner */
+    color: #374151; /* gray-800 */
+}
+
+.personal-result {
+    background-color: #eff6ff; /* blue-50 */
+    border-color: #bfdbfe; /* blue-200 */
+}
+
+.empresarial-result {
+    background-color: #dcfce7; /* green-50 */
+    border-color: #a7f3d0; /* green-200 */
+}
+
+.result-title {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 700; /* font-bold */
+    margin-bottom: 1rem; /* mb-4 */
+}
+
+.result-item {
+    font-size: 1.125rem; /* text-lg */
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.result-total {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 700; /* font-bold */
+    color: #10b981; /* green-700 */
+    margin-top: 1rem; /* mt-4 */
+}
+
+/* --- Message Box Styles --- */
+.message-box {
+    margin-top: 1rem; /* mt-4 */
+    padding: 1rem; /* p-4 */
+    border: 1px solid;
+    border-radius: 0.375rem; /* rounded-md */
+}
+
+.message-box.warning {
+    background-color: #fffbeb; /* yellow-100 */
+    border-color: #fcd34d; /* yellow-400 */
+    color: #b45309; /* yellow-800 */
+}
+
+.message-box.error {
+    background-color: #fee2e2; /* red-100 */
+    border-color: #ef4444; /* red-400 */
+    color: #b91c1c; /* red-800 */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 767px) {
+    .stepper-nav {
+        padding: 0 0.5rem;
+    }
+
+    .stepper-label {
+        font-size: 0.75rem; /* Smaller font for labels */
+        max-width: 80px; /* Adjust max-width */
+    }
+
+    .form-container {
+        padding: 1rem;
+    }
+
+    .main-title {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .step-title {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .radio-group.three-cols {
+        grid-template-columns: 1fr; /* Stack on small screens */
+    }
+
+    .navigation-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .button-primary,
+    .button-secondary,
+    .button-edit {
+        width: 100%;
+        margin-left: 0 !important; /* Override ml-auto */
+        margin-right: 0 !important;
+    }
 }
 
 legend {
@@ -95,15 +598,6 @@ legend {
         font-weight: bold;
         color: #217867ff;
     }
-}
-
-fieldset {
-    margin: 0;
-    padding: 18px 6px !important;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 18px;
 }
 
 .hidden {

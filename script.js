@@ -35,21 +35,43 @@ const profissionaisNamesEmpresarial = {
 
 document.addEventListener('DOMContentLoaded', () => {
     // Referências aos elementos do DOM comuns
-    const tipoCotacaoRadios = document.querySelectorAll('input[name="tipo_cotacao"]');
     const formPessoal = document.getElementById('form-pessoal');
     const formEmpresarial = document.getElementById('form-empresarial');
     const messageBox = document.getElementById('message-box');
 
-    // Referências aos elementos do DOM do formulário Pessoal
+    const stepperSteps = document.querySelectorAll('.stepper-step-item'); // Alterado para .stepper-step-item
+    const formSteps = document.querySelectorAll('.form-step');
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    const messageBox = document.getElementById('message-box');
+    const editCotacaoButton = document.getElementById('edit-cotacao-button');
+
+    // Elementos do Passo 1 (Tipo de Cotação)
+    const tipoCotacaoRadios = document.querySelectorAll('input[name="tipo_cotacao"]');
+
+    // Elementos do Passo 2 (Dados Pessoais/Empresariais)
+    const formDadosPessoais = document.getElementById('personalForm');
+    const formDadosEmpresariais = document.getElementById('businessForm');
+    const nomePessoalInput = document.getElementById('nome');
+    const cpfPessoalInput = document.getElementById('cpf');
+    const razaoSocialEmpresarialInput = document.getElementById('businessName');
+    const cnpjEmpresarialInput = document.getElementById('CNPJ');
+
+    // Elementos do Passo 3 (Detalhes da Cotação)
+    const formCotacaoPessoal = document.getElementById('professionalInfo');
+    const formCotacaoEmpresarial = document.getElementById('businessDetails');
+
+    // Pessoal
     const importanciaSliderPessoal = document.getElementById('importancia-slider-pessoal');
     const importanciaDisplayPessoal = document.getElementById('importancia-display-pessoal');
-    const cotarButtonPessoal = document.getElementById('cotar-button-pessoal');
-    const resultadoPessoalDiv = document.getElementById('resultado-pessoal');
+    
 
-    // Referências aos elementos do DOM do formulário Empresarial
+    // Empresarial
     const lmgSliderEmpresarial = document.getElementById('lmg-slider-empresarial');
     const lmgDisplayEmpresarial = document.getElementById('lmg-display-empresarial');
-    const cotarButtonEmpresarial = document.getElementById('cotar-button-empresarial');
+
+    // Elementos do Passo 4 (Resumo)
+    const resultadoPessoalDiv = document.getElementById('resultado-pessoal');
     const resultadoEmpresarialDiv = document.getElementById('resultado-empresarial');
 
     let validImportanciasPessoal = []; // Valores válidos para slider Pessoal
@@ -122,6 +144,209 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    function updateStepperUI() {
+        stepperSteps.forEach((step, index) => {
+            if (index === currentStep) {
+                step.classList.add('active');
+                step.classList.remove('completed');
+            } else if (index < currentStep) {
+                step.classList.add('completed');
+                step.classList.remove('active');
+            } else {
+                step.classList.remove('active', 'completed');
+            }
+        });
+
+        // Atualiza visibilidade dos botões de navegação
+        prevButton.classList.toggle('hidden', currentStep === 0);
+        nextButton.classList.toggle('hidden', currentStep === totalSteps - 1);
+        editCotacaoButton.classList.toggle('hidden', currentStep !== totalSteps - 1); // Mostra "Editar" apenas no resumo
+
+        // Altera o texto do botão "Próximo" para "Finalizar" no penúltimo passo
+        if (currentStep === totalSteps - 2) { // Penúltimo passo (antes do resumo)
+            nextButton.textContent = 'Finalizar Cotação';
+        } else {
+            nextButton.textContent = 'Próximo';
+        }
+    }
+
+    // Exibe o passo atual e oculta os outros
+    function showStep(stepIndex) {
+        formSteps.forEach((stepElement, index) => {
+            stepElement.classList.toggle('hidden', index !== stepIndex);
+        });
+        updateStepperUI();
+        hideMessage(); // Sempre esconde a mensagem ao mudar de passo
+        hideAllResults(); // Esconde resultados ao mudar de passo
+
+        // Lógica específica para o Passo 2 (Dados Pessoais/Empresariais)
+        if (stepIndex === 1) {
+            const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
+            if (selectedType === 'pessoal') {
+                formDadosPessoais.classList.remove('hidden');
+                formDadosEmpresariais.classList.add('hidden');
+            } else if (selectedType === 'empresarial') {
+                formDadosPessoais.classList.add('hidden');
+                formDadosEmpresariais.classList.remove('hidden');
+            }
+        }
+        // Lógica específica para o Passo 3 (Detalhes da Cotação)
+        else if (stepIndex === 2) {
+            const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
+            if (selectedType === 'pessoal') {
+                formCotacaoPessoal.classList.remove('hidden');
+                formCotacaoEmpresarial.classList.add('hidden');
+            } else if (selectedType === 'empresarial') {
+                formCotacaoPessoal.classList.add('hidden');
+                formCotacaoEmpresarial.classList.remove('hidden');
+            }
+        }
+        // Lógica específica para o Passo 4 (Resumo)
+        else if (stepIndex === 3) {
+            displaySummary(); // Chama a função para exibir o resumo
+        }
+    }
+
+    // Valida o passo atual antes de avançar
+    function validateStep(stepIndex) {
+        hideMessage(); // Limpa mensagens anteriores
+
+        let isValid = true;
+        let errorMessage = '';
+
+        if (stepIndex === 0) { // Validação do Passo 1: Tipo de Cotação
+            const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked');
+            if (!selectedType) {
+                errorMessage = 'Por favor, selecione o tipo de cotação (Pessoal ou Empresarial).';
+                isValid = false;
+            }
+        } else if (stepIndex === 1) { // Validação do Passo 2: Dados Pessoais/Empresariais
+            const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
+            if (selectedType === 'pessoal') {
+                if (!nomePessoalInput.value.trim() || !cpfPessoalInput.value.trim()) {
+                    errorMessage = 'Por favor, preencha seu Nome Completo e CPF.';
+                    isValid = false;
+                }
+            } else if (selectedType === 'empresarial') {
+                if (!razaoSocialEmpresarialInput.value.trim() || !cnpjEmpresarialInput.value.trim()) {
+                    errorMessage = 'Por favor, preencha a Razão Social e o CNPJ.';
+                    isValid = false;
+                }
+            } else {
+                errorMessage = 'Tipo de cotação não selecionado no passo anterior.';
+                isValid = false;
+            }
+        } else if (stepIndex === 2) { // Validação do Passo 3: Detalhes da Cotação
+            const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
+            if (selectedType === 'pessoal') {
+                const selectedGrupoPessoal = document.querySelector('input[name="grupo_pessoal"]:checked');
+                const selectedEquipePessoal = document.querySelector('input[name="equipe_pessoal"]:checked');
+                if (!selectedGrupoPessoal || !selectedEquipePessoal || isNaN(parseFloat(importanciaSliderPessoal.value))) {
+                    errorMessage = 'Por favor, selecione o Tipo de Equipe, o Grupo e a Importância Segurada para a Cotação Pessoal.';
+                    isValid = false;
+                }
+            } else if (selectedType === 'empresarial') {
+                const selectedGrupoEmpresarial = document.querySelector('input[name="grupo_empresarial"]:checked');
+                const selectedProfissionaisEmpresarial = document.querySelector('input[name="profissionais_empresarial"]:checked');
+                if (!selectedGrupoEmpresarial || !selectedProfissionaisEmpresarial || isNaN(parseFloat(lmgSliderEmpresarial.value))) {
+                    errorMessage = 'Por favor, selecione o Grupo, a Quantidade de Profissionais e o LMG para a Cotação Empresarial.';
+                    isValid = false;
+                }
+            } else {
+                errorMessage = 'Tipo de cotação não selecionado no passo anterior.';
+                isValid = false;
+            }
+        }
+
+        if (!isValid) {
+            showMessage(errorMessage, 'error');
+        }
+        return isValid;
+    }
+
+    // --- Navegação do Stepper ---
+
+    prevButton.addEventListener('click', () => {
+        if (currentStep > 0) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    });
+
+    nextButton.addEventListener('click', () => {
+        if (validateStep(currentStep)) {
+            if (currentStep < totalSteps - 1) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+    });
+
+    editCotacaoButton.addEventListener('click', () => {
+        currentStep = 0; // Volta para o primeiro passo para edição
+        showStep(currentStep);
+        // Não reseta os inputs aqui, apenas permite a edição.
+        // O reset acontece apenas se o tipo de cotação for alterado no Passo 1.
+    });
+
+    // --- Lógica de Reset de Formulários ---
+
+    // Função para resetar todos os inputs de um formulário
+    function resetFormFields(formElement) {
+        formElement.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+        formElement.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.checked = false;
+            // Adaptação para as novas classes CSS
+            const parentLabel = radio.closest('.radio-option'); // Todos os radio options tem esta classe
+            if (parentLabel) {
+                parentLabel.classList.remove('selected');
+            }
+        });
+        // Resetar sliders para o valor mínimo inicial
+        if (formElement.id === 'personalForm') {
+            setupImportanciaSliderPessoal();
+        } else if (formElement.id === 'businessForm') {
+            setupLMGSliderEmpresarial();
+        }
+    }
+
+    // Listener para o tipo de cotação (Pessoal/Empresarial)
+    tipoCotacaoRadios.forEach(radio => {
+        radio.addEventListener('change', (event) => {
+            // Resetar formulários quando o tipo de cotação muda
+            resetFormFields(formDadosPessoais);
+            resetFormFields(formDadosEmpresariais);
+            resetFormFields(formCotacaoPessoal);
+            resetFormFields(formCotacaoEmpresarial);
+
+            // Garante que o radio button recém-selecionado tenha a classe 'selected'
+            setupRadioSelection('tipo_cotacao', 'cotacao-type-option');
+
+            // Atualiza a visibilidade dos sub-formulários no Passo 2 e Passo 3
+            const selectedType = event.target.value;
+            if (currentStep === 1) { // Se estiver no passo de dados pessoais/empresariais
+                if (selectedType === 'pessoal') {
+                    formDadosPessoais.classList.remove('hidden');
+                    formDadosEmpresariais.classList.add('hidden');
+                } else {
+                    formDadosPessoais.classList.add('hidden');
+                    formDadosEmpresariais.classList.remove('hidden');
+                }
+            } else if (currentStep === 2) { // Se estiver no passo de detalhes da cotação
+                if (selectedType === 'pessoal') {
+                    formCotacaoPessoal.classList.remove('hidden');
+                    formCotacaoEmpresarial.classList.add('hidden');
+                } else {
+                    formCotacaoPessoal.classList.add('hidden');
+                    formCotacaoEmpresarial.classList.remove('hidden');
+                }
+            }
+            hideAllResults(); // Esconde resultados ao trocar o tipo de cotação
+            hideMessage(); // Esconde mensagens
+        });
+    });
+
     // --- Lógica do Formulário Pessoal ---
     function setupImportanciaSliderPessoal() {
         const importanciasSet = new Set(planData.map(item => item.importancia_segurada));
@@ -146,50 +371,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Slider de importância segurada Pessoal configurado.');
     }
 
-    cotarButtonPessoal.addEventListener('click', () => {
-        console.log('Botão Cotar Pessoal clicado!');
-        hideAllResults();
-
-        const selectedGrupoRadio = document.querySelector('input[name="grupo_pessoal"]:checked');
-        const selectedGrupo = selectedGrupoRadio ? selectedGrupoRadio.value : '';
-
-        const selectedEquipeRadio = document.querySelector('input[name="equipe_pessoal"]:checked');
-        const selectedEquipeKey = selectedEquipeRadio ? selectedEquipeRadio.value : '';
-
-        const selectedImportancia = parseFloat(importanciaSliderPessoal.value);
-
-        if (!selectedGrupo || !selectedEquipeKey || isNaN(selectedImportancia)) {
-            showMessage('Por favor, selecione o Tipo de Equipe, o Grupo e a Importância Segurada para a Cotação Pessoal.', 'warning');
-            return;
-        }
-
-        const foundItem = planData.find(item =>
-            item.grupo === selectedGrupo &&
-            item.importancia_segurada === selectedImportancia
-        );
-
-        if (foundItem) {
-            const cota = foundItem[selectedEquipeKey];
-            if (cota) {
-                document.getElementById('res-grupo-pessoal').textContent = grupoNamesPessoal[selectedGrupo];
-                document.getElementById('res-especialidade-pessoal').textContent = grupoNamesPessoal[selectedGrupo].split('(')[1].replace(')', '');
-                document.getElementById('res-importancia-pessoal').textContent = selectedImportancia.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                document.getElementById('res-equipe-pessoal').textContent = equipeNames[selectedEquipeKey];
-                document.getElementById('res-premio-pessoal').textContent = cota.premio_total_ano.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                document.getElementById('res-parcelamento-pessoal').textContent = cota.parcelamento_maximo_meses;
-                document.getElementById('res-condicao-pessoal').textContent = cota.parcela_minima_condicao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
-                resultadoPessoalDiv.classList.remove('hidden');
-                hideMessage();
-            } else {
-                showMessage('Dados de cotação não encontrados para o tipo de equipe selecionado no formulário Pessoal. Verifique suas opções.', 'error');
-            }
-        } else {
-            showMessage('Não foi encontrado um plano com as seleções de Grupo e Importância Segurada informadas no formulário Pessoal. Verifique os valores.', 'error');
-        }
-    });
-
-    // --- Lógica do Formulário Empresarial ---
     function setupLMGSliderEmpresarial() {
         const lmgsSet = new Set(planDataEmpresarial.map(item => item.lmg));
         validLMGsEmpresarial = Array.from(lmgsSet).sort((a, b) => a - b);
@@ -213,45 +394,60 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Slider de LMG Empresarial configurado.');
     }
 
-    cotarButtonEmpresarial.addEventListener('click', () => {
-        console.log('Botão Cotar Empresarial clicado!');
-        hideAllResults();
+     function displaySummary() {
+        const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
+        hideAllResults(); // Esconde ambos os resultados antes de exibir o correto
 
-        const selectedGrupoRadio = document.querySelector('input[name="grupo_empresarial"]:checked');
-        const selectedGrupo = selectedGrupoRadio ? selectedGrupoRadio.value : '';
+        if (selectedType === 'pessoal') {
+            const selectedGrupoPessoal = document.querySelector('input[name="grupo_pessoal"]:checked')?.value;
+            const selectedEquipePessoal = document.querySelector('input[name="equipe_pessoal"]:checked')?.value;
+            const selectedImportanciaPessoal = parseFloat(importanciaSliderPessoal.value);
 
-        const selectedProfissionaisRadio = document.querySelector('input[name="profissionais_empresarial"]:checked');
-        const selectedProfissionaisKey = selectedProfissionaisRadio ? selectedProfissionaisRadio.value : '';
+            const foundItem = planData.find(item =>
+                item.grupo === selectedGrupoPessoal &&
+                item.importancia_segurada === selectedImportanciaPessoal
+            );
 
-        const selectedLMG = parseFloat(lmgSliderEmpresarial.value);
+            if (foundItem && foundItem[selectedEquipePessoal]) {
+                const cota = foundItem[selectedEquipePessoal];
+                document.getElementById('res-grupo-pessoal-resumo').textContent = grupoNamesPessoal[selectedGrupoPessoal];
+                document.getElementById('res-especialidade-pessoal-resumo').textContent = grupoNamesPessoal[selectedGrupoPessoal].split('(')[1].replace(')', '');
+                document.getElementById('res-importancia-pessoal-resumo').textContent = selectedImportanciaPessoal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                document.getElementById('res-equipe-pessoal-resumo').textContent = equipeNames[selectedEquipePessoal];
+                document.getElementById('res-premio-pessoal-resumo').textContent = cota.premio_total_ano.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                document.getElementById('res-parcelamento-pessoal-resumo').textContent = cota.parcelamento_maximo_meses;
+                document.getElementById('res-condicao-pessoal-resumo').textContent = cota.parcela_minima_condicao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                resultadoPessoalResumoDiv.classList.remove('hidden');
+            } else {
+                showMessage('Não foi possível gerar o resumo da Cotação Pessoal. Verifique os dados preenchidos.', 'error');
+            }
+        } else if (selectedType === 'empresarial') {
+            const selectedGrupoEmpresarial = document.querySelector('input[name="grupo_empresarial"]:checked')?.value;
+            const selectedProfissionaisEmpresarial = document.querySelector('input[name="profissionais_empresarial"]:checked')?.value;
+            const selectedLMGEmpresarial = parseFloat(lmgSliderEmpresarial.value);
 
-        if (!selectedGrupo || !selectedProfissionaisKey || isNaN(selectedLMG)) {
-            showMessage('Por favor, selecione o Grupo, a Quantidade de Profissionais e o LMG para a Cotação Empresarial.', 'warning');
-            return;
-        }
+            const foundItem = planDataEmpresarial.find(item =>
+                item.grupo === selectedGrupoEmpresarial &&
+                item.quantidade_profissionais_key === selectedProfissionaisEmpresarial &&
+                item.lmg === selectedLMGEmpresarial
+            );
+            const foundFranquia = franquiaDataEmpresarial.find(item => item.lmg === selectedLMGEmpresarial);
 
-        const foundItem = planDataEmpresarial.find(item =>
-            item.grupo === selectedGrupo &&
-            item.quantidade_profissionais_key === selectedProfissionaisKey &&
-            item.lmg === selectedLMG
-        );
-
-        const foundFranquia = franquiaDataEmpresarial.find(item => item.lmg === selectedLMG);
-
-        if (foundItem) {
-            document.getElementById('res-grupo-empresarial').textContent = grupoNamesEmpresarial[selectedGrupo];
-            document.getElementById('res-tipo-instituicao-empresarial').textContent = foundItem.tipo_instituicao;
-            document.getElementById('res-profissionais-empresarial').textContent = profissionaisNamesEmpresarial[selectedProfissionaisKey];
-            document.getElementById('res-lmg-empresarial').textContent = selectedLMG.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-            document.getElementById('res-premio-empresarial').textContent = foundItem.premio_a_vista.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-            document.getElementById('res-franquia-empresarial').textContent = foundFranquia ? foundFranquia.franquia_texto : 'Não disponível';
-
-            resultadoEmpresarialDiv.classList.remove('hidden');
-            hideMessage();
+            if (foundItem) {
+                document.getElementById('res-grupo-empresarial-resumo').textContent = grupoNamesEmpresarial[selectedGrupoEmpresarial];
+                document.getElementById('res-tipo-instituicao-empresarial-resumo').textContent = foundItem.tipo_instituicao;
+                document.getElementById('res-profissionais-empresarial-resumo').textContent = profissionaisNamesEmpresarial[selectedProfissionaisEmpresarial];
+                document.getElementById('res-lmg-empresarial-resumo').textContent = selectedLMGEmpresarial.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                document.getElementById('res-premio-empresarial-resumo').textContent = foundItem.premio_a_vista.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                document.getElementById('res-franquia-empresarial-resumo').textContent = foundFranquia ? foundFranquia.franquia_texto : 'Não disponível';
+                resultadoEmpresarialResumoDiv.classList.remove('hidden');
+            } else {
+                showMessage('Não foi possível gerar o resumo da Cotação Empresarial. Verifique os dados preenchidos.', 'error');
+            }
         } else {
-            showMessage('Não foi encontrado um plano com as seleções de Grupo, Profissionais e LMG informadas no formulário Empresarial. Verifique os valores.', 'error');
+            showMessage('Tipo de cotação não selecionado para gerar o resumo.', 'error');
         }
-    });
+    }
 
     // --- Lógica de Alternância de Formulário ---
     function toggleFormVisibility() {
@@ -278,21 +474,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setupRadioSelection('grupo_empresarial', 'card-option'); // Assumindo que você usou 'grupo-option' ou similar
     setupRadioSelection('profissionais_empresarial', 'card-option');
 
-    // Adiciona listeners para os radio buttons de tipo de cotação
-    tipoCotacaoRadios.forEach(radio => {
-        radio.addEventListener('change', toggleFormVisibility);
-        radio.addEventListener('change', () => {
-            tipoCotacaoRadios.forEach(opcao => {
-                opcao.closest('.card-option').classList.remove('selected');
-            });
-            if (radio.checked) {
-                radio.closest('.card-option').classList.add('selected');
-            }
-        });
-    });
-
     // Inicializa o formulário correto ao carregar a página
-    toggleFormVisibility();
+    showStep(currentStep);
     setupImportanciaSliderPessoal(); // Inicializa o slider pessoal
     setupLMGSliderEmpresarial(); // Inicializa o slider empresarial
 });

@@ -15,247 +15,79 @@
     <div class="form-container">
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Cotação de Plano de Importância Segurada</h1>
 
+        <div id="stepper-indicators" class="stepper-nav">
+            <div class="stepper-line"></div>
+            <div class="stepper-step-item" data-step="0">
+                <div class="stepper-circle">1</div>
+                <span class="stepper-label">Tipo de Cotação</span>
+            </div>
+            <div class="stepper-step-item" data-step="1">
+                <div class="stepper-circle">2</div>
+                <span class="stepper-label">Dados Pessoais/Empresariais</span>
+            </div>
+            <div class="stepper-step-item" data-step="2">
+                <div class="stepper-circle">3</div>
+                <span class="stepper-label">Detalhes da Cotação</span>
+            </div>
+            <div class="stepper-step-item" data-step="3">
+                <div class="stepper-circle">4</div>
+                <span class="stepper-label">Resumo</span>
+            </div>
+        </div>
         <!-- Seleção do Tipo de Cotação -->
-        <section class="mb-8">
+        <section class="form-step" id="step-0">
             <label class="block text-lg font-medium text-gray-700 mb-2">
                 Selecione o Tipo de Cotação:
             </label>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <label class="card-option">
                     <input type="radio" name="tipo_cotacao" value="pessoal" class="hidden" checked>
-                    <span class="text-lg font-medium text-gray-800 text-center">Cotação Pessoal</span>
+                    <span class="">Cotação Pessoal</span>
                 </label>
                 <label class="card-option">
                     <input type="radio" name="tipo_cotacao" value="empresarial" class="hidden">
-                    <span class="text-lg font-medium text-gray-800 text-center">Cotação Empresarial</span>
+                    <span class="">Cotação Empresarial</span>
                 </label>
             </div>
         </section>
 
         <!-- Formulário de Cotação Pessoal -->
-        <div id="form-pessoal" class="space-y-6">
+        <section id="step-1" class="form-step hidden">
             <h2 class="text-2xl font-bold text-center text-gray-700 mb-6">Formulário Pessoal</h2>
             <!-- Seleção do Tipo de Equipe como Radio Buttons Estilizados -->
-            <form action="#" method="POST">
-                <fieldset>
-                    <legend>Dados do Segurado:</legend>
+            <fieldset class="form-section" id="personalForm">
+                <legend>Dados do Segurado:</legend>
 
-                    <div class="row">
-                        <div class="input-container col-sm-8">
-                            <label for="personalName">Nome:</label>
-                            <input type="text" id="personalName" name="personalName" required>
-                        </div>
-
-                        <div class="input-container col-sm-4">
-                            <label for="cpf">CPF:</label>
-                            <input type="text" id="cpf" name="cpf" required>
-                        </div>
+                <div class="row">
+                    <div class="input-container col-sm-8">
+                        <label for="personalName">Nome:</label>
+                        <input type="text" id="personalName" name="personalName" required>
                     </div>
 
-                    <div class="row">
-                        <div class="input-container col-sm-4">
-                            <label for="birthDate">Data de Nascimento:</label>
-                            <input type="date" id="birthDate" name="birthDate" required>
-                        </div>
+                    <div class="input-container col-sm-4">
+                        <label for="cpf">CPF:</label>
+                        <input type="text" id="cpf" name="cpf" required>
+                    </div>
+                </div>
 
-                        <div class="input-container col-sm-4">
-                            <label for="personalEmail">E-mail:</label>
-                            <input type="email" id="personalEmail" name="personalEmail">
-                        </div>
-
-                        <div class="input-container col-sm-4">
-                            <label for="personalNumber">Telefone: </label>
-                            <input type="tel" name="personalNumber" id="personalNumber">
-                        </div>
+                <div class="row">
+                    <div class="input-container col-sm-4">
+                        <label for="birthDate">Data de Nascimento:</label>
+                        <input type="date" id="birthDate" name="birthDate" required>
                     </div>
 
-                    <div class="row">
-                        <div class="input-container col-sm-4">
-                            <label for="personalCep">CEP:</label>
-                            <input type="text" id="personalCep" name="personalCep">
-                        </div>
-
-                        <div class="input-container col-sm-8">
-                            <label for="personalAddress">Rua:</label>
-                            <input type="text" id="personalAddress" name="personalAddress">
-                        </div>
+                    <div class="input-container col-sm-4">
+                        <label for="personalEmail">E-mail:</label>
+                        <input type="email" id="personalEmail" name="personalEmail">
                     </div>
 
-                    <div class="row">
-                        <div class="input-container col-sm-3">
-                            <label for="addressNumber">Número:</label>
-                            <input type="number" id="addressNumber" name="addressNumber">
-                        </div>
-
-                        <div class="input-container col-sm-9">
-                            <label for="addressComplement">Complemento:</label>
-                            <input type="text" id="addressComplement" name="addressComplement">
-                        </div>
+                    <div class="input-container col-sm-4">
+                        <label for="personalNumber">Telefone: </label>
+                        <input type="tel" name="personalNumber" id="personalNumber">
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="input-container col-sm-6">
-                            <label for="neighborhood">Bairro:</label>
-                            <input type="text" id="neighborhood" name="neighborhood">
-                        </div>
-
-                        <div class="input-container col-sm-4">
-                            <label for="city">Cidade:</label>
-                            <input type="text" id="city" name="city">
-                        </div>
-
-                        <div class="input-container col-sm-2">
-                            <label for="state">Estado:</label>
-                            <input type="text" id="state" name="state">
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Informações profissionais</legend>
-
-                    <div>
-                        <label for="CRF">CRF:</label>
-                        <input type="number" name="CRF" id="CRF" required>
-                    </div>
-
-                    <label class="block text-lg font-medium text-gray-700 mb-2">
-                        Selecione o Tipo de Equipe:
-                    </label>
-                    <div id="equipe-options-pessoal" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <label
-                            class="card-option">
-                            <input type="radio" name="equipe_pessoal" value="sem_chefe_sem_diretor_clinico"
-                                class="hidden">
-                            <span class="text-lg font-medium text-gray-800 text-center">Sem Chefe de Equipe e Sem
-                                Diretor Clínico</span>
-                        </label>
-                        <label
-                            class="card-option">
-                            <input type="radio" name="equipe_pessoal" value="com_chefe_sem_diretor_clinico"
-                                class="hidden">
-                            <span class="text-lg font-medium text-gray-800 text-center">Com Chefe de Equipe e Sem
-                                Diretor Clínico</span>
-                        </label>
-                        <label
-                            class="card-option">
-                            <input type="radio" name="equipe_pessoal" value="sem_chefe_com_diretor_clinico"
-                                class="hidden">
-                            <span class="text-lg font-medium text-gray-800 text-center">Sem Chefe de Equipe e Com
-                                Diretor Clínico</span>
-                        </label>
-                        <label
-                            class="card-option">
-                            <input type="radio" name="equipe_pessoal" value="com_chefe_com_diretor_clinico"
-                                class="hidden">
-                            <span class="text-lg font-medium text-gray-800 text-center">Com Chefe de Equipe e Com
-                                Diretor Clínico</span>
-                        </label>
-                    </div>
-
-                    <div>
-                        <label class="block text-lg font-medium text-gray-700 mb-2">
-                            Selecione o Grupo / Especialidade:
-                        </label>
-                        <div id="grupo-options-pessoal" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <label
-                                class="card-option">
-                                <input type="radio" name="grupo_pessoal" value="G2" class="hidden">
-                                <span class="text-lg font-medium text-gray-800 text-center">G2 (Farmácia sem
-                                    Estética)</span>
-                            </label>
-                            <label
-                                class="card-option">
-                                <input type="radio" name="grupo_pessoal" value="G5" class="hidden">
-                                <span class="text-lg font-medium text-gray-800 text-center">G5 (Farmácia com
-                                    Estética)</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Slider para Importância Segurada Pessoal -->
-                    <div>
-                        <label for="importancia-slider-pessoal" class="block text-lg font-medium text-gray-700 mb-2">
-                            Importância Segurada: <span id="importancia-display-pessoal"
-                                class="font-bold text-blue-600">R$
-                                100.000,00</span>
-                        </label>
-                        <input type="range" id="importancia-slider-pessoal"
-                            class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg accent-blue-600"
-                            min="100000" max="1000000" step="1">
-                    </div>
-
-                    <!-- Botão de Cotação Pessoal -->
-                    <button id="cotar-button-pessoal"
-                        class="w-full flex justify-center py-3 px-6 border border-transparent rounded-md shadow-sm text-xl font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-105">
-                        Cotar Pessoal
-                    </button>
-                </fieldset>
-            </form>
-
-            <!-- Seleção do Grupo (Especialidade) como Radio Buttons Estilizados -->
-
-
-            <!-- Área de Resultado Pessoal -->
-            <div id="resultado-pessoal"
-                class="mt-8 p-6 bg-blue-50 border border-blue-200 rounded-lg shadow-inner text-gray-800 hidden">
-                <h2 class="text-2xl font-bold text-blue-700 mb-4">Resultado da Cotação Pessoal:</h2>
-                <p class="text-lg mb-2"><strong class="text-blue-600">Grupo:</strong> <span
-                        id="res-grupo-pessoal"></span></p>
-                <p class="text-lg mb-2"><strong class="text-blue-600">Especialidade:</strong> <span
-                        id="res-especialidade-pessoal"></span></p>
-                <p class="text-lg mb-2"><strong class="text-blue-600">Importância Segurada:</strong> <span
-                        id="res-importancia-pessoal"></span></p>
-                <p class="text-lg mb-2"><strong class="text-blue-600">Tipo de Equipe:</strong> <span
-                        id="res-equipe-pessoal"></span></p>
-                <p class="2xl font-bold text-green-700 mt-4"><strong class="text-blue-600">Prêmio Total Anual:</strong>
-                    <span id="res-premio-pessoal"></span>
-                </p>
-                <p class="text-lg mb-2"><strong class="text-blue-600">Parcelamento Máximo:</strong> <span
-                        id="res-parcelamento-pessoal"></span></p>
-                <p class="text-lg"><strong class="text-blue-600">Condição de Parcela Mínima:</strong> <span
-                        id="res-condicao-pessoal"></span></p>
-            </div>
-        </div>
-
-        <!-- Formulário de Cotação Empresarial (Inicialmente oculto) -->
-        <div id="form-empresarial" class="space-y-6 hidden">
-            <form>
-                <fieldset>
-                    <legend>Dados da Empresa</legend>
-
-                    <div class="row">
-                        <div class="input-container col-sm-9">
-                            <label for="businessName">Nome da Empresa:</label>
-                            <input type="text" name="businessName" id="businessName">
-                        </div>
-
-                        <div class="input-container col-sm-3">
-                            <label for="CNPJ">CNPJ:</label>
-                            <input type="text" name="CNPJ" id="CNPJ">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="checkbox-group col-sm-4">
-                            <label class="switch" for="filial">
-                                <input type="checkbox" id="filial" name="filial">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-
-                        <div class="input-container col-sm-4">
-                            <label for="businessTel">Telefone para contato:</label>
-                            <input type="text" name="businessTel" id="businessTel">
-                        </div>
-
-                        <div class="input-container col-sm-4">
-                            <label for="businessEmail">E-mail para contato:</label>
-                            <input type="email" name="businessEmail" id="businessEmail">
-                        </div>
-                    </div>
-
-                    <div class="row">
+                <div class="row">
                     <div class="input-container col-sm-4">
                         <label for="personalCep">CEP:</label>
                         <input type="text" id="personalCep" name="personalCep">
@@ -265,9 +97,9 @@
                         <label for="personalAddress">Rua:</label>
                         <input type="text" id="personalAddress" name="personalAddress">
                     </div>
-                    </div>
+                </div>
 
-                    <div class="row">
+                <div class="row">
                     <div class="input-container col-sm-3">
                         <label for="addressNumber">Número:</label>
                         <input type="number" id="addressNumber" name="addressNumber">
@@ -277,9 +109,9 @@
                         <label for="addressComplement">Complemento:</label>
                         <input type="text" id="addressComplement" name="addressComplement">
                     </div>
-                    </div>
+                </div>
 
-                    <div class="row">
+                <div class="row">
                     <div class="input-container col-sm-6">
                         <label for="neighborhood">Bairro:</label>
                         <input type="text" id="neighborhood" name="neighborhood">
@@ -294,115 +126,290 @@
                         <label for="state">Estado:</label>
                         <input type="text" id="state" name="state">
                     </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="form-section hidden" id="businessForm">
+                <legend>Dados da Empresa</legend>
+
+                <div class="row">
+                    <div class="input-container col-sm-9">
+                        <label for="businessName">Nome da Empresa:</label>
+                        <input type="text" name="businessName" id="businessName">
                     </div>
 
-                </fieldset>
+                    <div class="input-container col-sm-3">
+                        <label for="CNPJ">CNPJ:</label>
+                        <input type="text" name="CNPJ" id="CNPJ">
+                    </div>
+                </div>
 
-                <fieldset>
-                    <legend>Formulário Empresarial</legend>
-                    <!-- Seleção do Grupo Empresarial -->
-                    <div>
-                        <label class="block text-lg font-medium text-gray-700 mb-2">
-                            Selecione o Grupo / Tipo de Instituição:
+                <div class="row">
+                    <div class="checkbox-group col-sm-4">
+                        <label class="switch" for="filial">
+                            <input type="checkbox" id="filial" name="filial">
+                            <span class="slider"></span>
                         </label>
-                        <div id="grupo-options-empresarial" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <label class="card-option">
-                                <input type="radio" name="grupo_empresarial" value="G1" class="hidden">
-                                <span class="text-lg font-medium text-gray-800 text-center">G1 (Farmácia sem
-                                    estética)</span>
-                            </label>
-                            <label
-                                class="card-option">
-                                <input type="radio" name="grupo_empresarial" value="G3" class="hidden">
-                                <span class="text-lg font-medium text-gray-800 text-center">G3 (Farmácia de
-                                    Manipulação)</span>
-                            </label>
-                            <label
-                                class="card-option">
-                                <input type="radio" name="grupo_empresarial" value="G6" class="hidden">
-                                <span class="text-lg font-medium text-gray-800 text-center">G6 (Farmácia com
-                                    estética²)</span>
-                            </label>
-                        </div>
                     </div>
 
-                    <!-- Seleção de Quantidade de Profissionais Empresarial -->
-                    <div>
-                        <label class="block text-lg font-medium text-gray-700 mb-2">
-                            Quantidade de Profissionais:
-                        </label>
-                        <div id="profissionais-options-empresarial" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <label
-                                class="card-option">
-                                <input type="radio" name="profissionais_empresarial" value="de_2_a_10_profissionais"
-                                    class="hidden">
-                                <span class="text-lg font-medium text-gray-800 text-center">De 2 até 10
-                                    Profissionais</span>
-                            </label>
-                            <label
-                                class="card-option">
-                                <input type="radio" name="profissionais_empresarial" value="de_11_a_20_profissionais"
-                                    class="hidden">
-                                <span class="text-lg font-medium text-gray-800 text-center">De 11 até 20
-                                    Profissionais</span>
-                            </label>
-                            <label
-                                class="card-option">
-                                <input type="radio" name="profissionais_empresarial" value="de_21_a_30_profissionais"
-                                    class="hidden">
-                                <span class="text-lg font-medium text-gray-800 text-center">De 21 até 30
-                                    Profissionais</span>
-                            </label>
-                            <label
-                                class="card-option">
-                                <input type="radio" name="profissionais_empresarial" value="de_31_a_50_profissionais"
-                                    class="hidden">
-                                <span class="text-lg font-medium text-gray-800 text-center">De 31 até 50
-                                    Profissionais</span>
-                            </label>
-                        </div>
+                    <div class="input-container col-sm-4">
+                        <label for="businessTel">Telefone para contato:</label>
+                        <input type="text" name="businessTel" id="businessTel">
                     </div>
 
-                    <!-- Slider para LMG Empresarial -->
-                    <div>
-                        <label for="lmg-slider-empresarial" class="block text-lg font-medium text-gray-700 mb-2">
-                            Limite Máximo de Garantia (LMG): <span id="lmg-display-empresarial"
-                                class="font-bold text-blue-600">R$ 60.000,00</span>
-                        </label>
-                        <input type="range" id="lmg-slider-empresarial"
-                            class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg accent-blue-600"
-                            min="60000" max="1000000" step="1">
+                    <div class="input-container col-sm-4">
+                        <label for="businessEmail">E-mail para contato:</label>
+                        <input type="email" name="businessEmail" id="businessEmail">
                     </div>
-                </fieldset>
-                <!-- Botão de Cotação Empresarial -->
-                <button id="cotar-button-empresarial"
-                    class="w-full flex justify-center py-3 px-6 border border-transparent rounded-md shadow-sm text-xl font-semibold text-white bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300 ease-in-out transform hover:scale-105">
-                    Cotar Empresarial
+                </div>
+
+                <div class="row">
+                    <div class="input-container col-sm-4">
+                        <label for="personalCep">CEP:</label>
+                        <input type="text" id="personalCep" name="personalCep">
+                    </div>
+
+                    <div class="input-container col-sm-8">
+                        <label for="personalAddress">Rua:</label>
+                        <input type="text" id="personalAddress" name="personalAddress">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-container col-sm-3">
+                        <label for="addressNumber">Número:</label>
+                        <input type="number" id="addressNumber" name="addressNumber">
+                    </div>
+
+                    <div class="input-container col-sm-9">
+                        <label for="addressComplement">Complemento:</label>
+                        <input type="text" id="addressComplement" name="addressComplement">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-container col-sm-6">
+                        <label for="neighborhood">Bairro:</label>
+                        <input type="text" id="neighborhood" name="neighborhood">
+                    </div>
+
+                    <div class="input-container col-sm-4">
+                        <label for="city">Cidade:</label>
+                        <input type="text" id="city" name="city">
+                    </div>
+
+                    <div class="input-container col-sm-2">
+                        <label for="state">Estado:</label>
+                        <input type="text" id="state" name="state">
+                    </div>
+                </div>
+
+            </fieldset>
+        </section>
+
+        <section id="step-2" class="form-step hidden">
+            <fieldset class="form-section" id="professionalInfo">
+                <legend>Informações profissionais</legend>
+
+                <div>
+                    <label for="CRF">CRF:</label>
+                    <input type="number" name="CRF" id="CRF" required>
+                </div>
+
+                <label class="block text-lg font-medium text-gray-700 mb-2">
+                    Selecione o Tipo de Equipe:
+                </label>
+                <div id="equipe-options-pessoal" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <label class="card-option">
+                        <input type="radio" name="equipe_pessoal" value="sem_chefe_sem_diretor_clinico" class="hidden">
+                        <span class="text-lg font-medium text-gray-800 text-center">Sem Chefe de Equipe e Sem
+                            Diretor Clínico</span>
+                    </label>
+                    <label class="card-option">
+                        <input type="radio" name="equipe_pessoal" value="com_chefe_sem_diretor_clinico" class="hidden">
+                        <span class="text-lg font-medium text-gray-800 text-center">Com Chefe de Equipe e Sem
+                            Diretor Clínico</span>
+                    </label>
+                    <label class="card-option">
+                        <input type="radio" name="equipe_pessoal" value="sem_chefe_com_diretor_clinico" class="hidden">
+                        <span class="text-lg font-medium text-gray-800 text-center">Sem Chefe de Equipe e Com
+                            Diretor Clínico</span>
+                    </label>
+                    <label class="card-option">
+                        <input type="radio" name="equipe_pessoal" value="com_chefe_com_diretor_clinico" class="hidden">
+                        <span class="text-lg font-medium text-gray-800 text-center">Com Chefe de Equipe e Com
+                            Diretor Clínico</span>
+                    </label>
+                </div>
+
+                <div>
+                    <label class="block text-lg font-medium text-gray-700 mb-2">
+                        Selecione o Grupo / Especialidade:
+                    </label>
+                    <div id="grupo-options-pessoal" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <label class="card-option">
+                            <input type="radio" name="grupo_pessoal" value="G2" class="hidden">
+                            <span class="text-lg font-medium text-gray-800 text-center">G2 (Farmácia sem
+                                Estética)</span>
+                        </label>
+                        <label class="card-option">
+                            <input type="radio" name="grupo_pessoal" value="G5" class="hidden">
+                            <span class="text-lg font-medium text-gray-800 text-center">G5 (Farmácia com
+                                Estética)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Slider para Importância Segurada Pessoal -->
+                <div>
+                    <label for="importancia-slider-pessoal" class="block text-lg font-medium text-gray-700 mb-2">
+                        Importância Segurada: <span id="importancia-display-pessoal" class="font-bold text-blue-600">R$
+                            100.000,00</span>
+                    </label>
+                    <input type="range" id="importancia-slider-pessoal"
+                        class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg accent-blue-600"
+                        min="100000" max="1000000" step="1">
+                </div>
+
+                <!-- Botão de Cotação Pessoal -->
+                <button id="cotar-button-pessoal"
+                    class="w-full flex justify-center py-3 px-6 border border-transparent rounded-md shadow-sm text-xl font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-105">
+                    Cotar Pessoal
                 </button>
-            </form>
-            <!-- Área de Resultado Empresarial -->
-            <div id="resultado-empresarial"
-                class="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg shadow-inner text-gray-800 hidden">
-                <h2 class="text-2xl font-bold text-green-700 mb-4">Resultado da Cotação Empresarial:</h2>
-                <p class="text-lg mb-2"><strong class="text-green-600">Grupo:</strong> <span
-                        id="res-grupo-empresarial"></span></p>
-                <p class="text-lg mb-2"><strong class="text-green-600">Tipo de Instituição:</strong> <span
-                        id="res-tipo-instituicao-empresarial"></span></p>
-                <p class="text-lg mb-2"><strong class="text-green-600">Quantidade de Profissionais:</strong> <span
-                        id="res-profissionais-empresarial"></span></p>
-                <p class="text-lg mb-2"><strong class="text-green-600">Limite Máximo de Garantia (LMG):</strong> <span
-                        id="res-lmg-empresarial"></span></p>
-                <p class="2xl font-bold text-green-700 mt-4"><strong class="text-green-600">Prêmio à Vista ou Até 6x Sem
-                        Juros:</strong> <span id="res-premio-empresarial"></span></p>
-                <p class="text-lg"><strong class="text-green-600">Franquia:</strong> <span
-                        id="res-franquia-empresarial"></span></p>
-            </div>
-        </div>
+            </fieldset>
 
-        <!-- Área de Mensagens (para erros ou avisos) -->
-        <div id="message-box" class="mt-4 p-4 bg-yellow-100 border border-yellow-400 text-yellow-800 rounded-md hidden">
-            <!-- Mensagens de erro ou aviso serão exibidas aqui -->
-        </div>
+            <fieldset class="form-section hidden" id="businessDetails">
+                <legend>Formulário Empresarial</legend>
+                <!-- Seleção do Grupo Empresarial -->
+                <div>
+                    <label class="block text-lg font-medium text-gray-700 mb-2">
+                        Selecione o Grupo / Tipo de Instituição:
+                    </label>
+                    <div id="grupo-options-empresarial" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <label class="card-option">
+                            <input type="radio" name="grupo_empresarial" value="G1" class="hidden">
+                            <span class="text-lg font-medium text-gray-800 text-center">G1 (Farmácia sem
+                                estética)</span>
+                        </label>
+                        <label class="card-option">
+                            <input type="radio" name="grupo_empresarial" value="G3" class="hidden">
+                            <span class="text-lg font-medium text-gray-800 text-center">G3 (Farmácia de
+                                Manipulação)</span>
+                        </label>
+                        <label class="card-option">
+                            <input type="radio" name="grupo_empresarial" value="G6" class="hidden">
+                            <span class="text-lg font-medium text-gray-800 text-center">G6 (Farmácia com
+                                estética²)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Seleção de Quantidade de Profissionais Empresarial -->
+                <div>
+                    <label class="block text-lg font-medium text-gray-700 mb-2">
+                        Quantidade de Profissionais:
+                    </label>
+                    <div id="profissionais-options-empresarial" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <label class="card-option">
+                            <input type="radio" name="profissionais_empresarial" value="de_2_a_10_profissionais"
+                                class="hidden">
+                            <span class="text-lg font-medium text-gray-800 text-center">De 2 até 10
+                                Profissionais</span>
+                        </label>
+                        <label class="card-option">
+                            <input type="radio" name="profissionais_empresarial" value="de_11_a_20_profissionais"
+                                class="hidden">
+                            <span class="text-lg font-medium text-gray-800 text-center">De 11 até 20
+                                Profissionais</span>
+                        </label>
+                        <label class="card-option">
+                            <input type="radio" name="profissionais_empresarial" value="de_21_a_30_profissionais"
+                                class="hidden">
+                            <span class="text-lg font-medium text-gray-800 text-center">De 21 até 30
+                                Profissionais</span>
+                        </label>
+                        <label class="card-option">
+                            <input type="radio" name="profissionais_empresarial" value="de_31_a_50_profissionais"
+                                class="hidden">
+                            <span class="text-lg font-medium text-gray-800 text-center">De 31 até 50
+                                Profissionais</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Slider para LMG Empresarial -->
+                <div>
+                    <label for="lmg-slider-empresarial" class="block text-lg font-medium text-gray-700 mb-2">
+                        Limite Máximo de Garantia (LMG): <span id="lmg-display-empresarial"
+                            class="font-bold text-blue-600">R$ 60.000,00</span>
+                    </label>
+                    <input type="range" id="lmg-slider-empresarial"
+                        class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg accent-blue-600"
+                        min="60000" max="1000000" step="1">
+                </div>
+
+            </fieldset>
+
+            <!-- Seleção do Grupo (Especialidade) como Radio Buttons Estilizados -->
+
+            <section id="step-3" class="form-step hidden">
+
+                <!-- Área de Resultado Pessoal -->
+                <div id="resultado-pessoal" class="hidden">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4">Resultado da Cotação Pessoal:</h2>
+                    <p class="text-lg mb-2"><strong class="text-blue-600">Grupo:</strong> <span
+                            id="res-grupo-pessoal"></span></p>
+                    <p class="text-lg mb-2"><strong class="text-blue-600">Especialidade:</strong> <span
+                            id="res-especialidade-pessoal"></span></p>
+                    <p class="text-lg mb-2"><strong class="text-blue-600">Importância Segurada:</strong> <span
+                            id="res-importancia-pessoal"></span></p>
+                    <p class="text-lg mb-2"><strong class="text-blue-600">Tipo de Equipe:</strong> <span
+                            id="res-equipe-pessoal"></span></p>
+                    <p class="2xl font-bold text-green-700 mt-4"><strong class="text-blue-600">Prêmio Total
+                            Anual:</strong>
+                        <span id="res-premio-pessoal"></span>
+                    </p>
+                    <p class="text-lg mb-2"><strong class="text-blue-600">Parcelamento Máximo:</strong> <span
+                            id="res-parcelamento-pessoal"></span></p>
+                    <p class="text-lg"><strong class="text-blue-600">Condição de Parcela Mínima:</strong> <span
+                            id="res-condicao-pessoal"></span></p>
+                </div>
+
+
+                <!-- Área de Resultado Empresarial -->
+                <div id="resultado-empresarial" class=" hidden">
+                    <h2 class="text-2xl font-bold text-green-700 mb-4">Resultado da Cotação Empresarial:</h2>
+                    <p class="text-lg mb-2"><strong class="text-green-600">Grupo:</strong> <span
+                            id="res-grupo-empresarial"></span></p>
+                    <p class="text-lg mb-2"><strong class="text-green-600">Tipo de Instituição:</strong> <span
+                            id="res-tipo-instituicao-empresarial"></span></p>
+                    <p class="text-lg mb-2"><strong class="text-green-600">Quantidade de Profissionais:</strong> <span
+                            id="res-profissionais-empresarial"></span></p>
+                    <p class="text-lg mb-2"><strong class="text-green-600">Limite Máximo de Garantia (LMG):</strong>
+                        <span id="res-lmg-empresarial"></span>
+                    </p>
+                    <p class="2xl font-bold text-green-700 mt-4"><strong class="text-green-600">Prêmio à Vista ou Até 6x
+                            Sem
+                            Juros:</strong> <span id="res-premio-empresarial"></span></p>
+                    <p class="text-lg"><strong class="text-green-600">Franquia:</strong> <span
+                            id="res-franquia-empresarial"></span></p>
+                </div>
+            </section>
+
+            <div class="navigation-buttons">
+                <button id="prev-button" class="button-secondary hidden">
+                    Anterior
+                </button>
+                <button id="next-button" class="button-primary">
+                    Próximo
+                </button>
+            </div>
+    </div>
+
+    <!-- Área de Mensagens (para erros ou avisos) -->
+    <div id="message-box" class="mt-4 p-4 bg-yellow-100 border border-yellow-400 text-yellow-800 rounded-md hidden">
+        <!-- Mensagens de erro ou aviso serão exibidas aqui -->
+    </div>
     </div>
 
     <!-- Seu arquivo JavaScript -->
