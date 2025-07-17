@@ -186,6 +186,12 @@ body {
 .form-section {
     padding-top: 1rem;
     padding-bottom: 1rem;
+    display: flex;
+    border: 0;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: stretch;
+    gap: 16px;
 }
 
 .section-subtitle {
@@ -578,7 +584,7 @@ legend {
 }
 
 .switch input[type="checkbox"]:checked+.slider {
-  background-color: #217867ff;
+  background-color: #007bff;
 }
 
 .card-option {
@@ -593,10 +599,10 @@ legend {
     transition: all 0.2s ease;
 
     &.selected {
-        border: 2px solid #217867ff;
+        border: 2px solid #007bff;
         background-color: #eaf1fd;
         font-weight: bold;
-        color: #217867ff;
+        color: #007bff;
     }
 }
 
