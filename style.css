@@ -589,6 +589,12 @@ input[type="date"] {
     }
 }
 
+input:read-only {
+    cursor: not-allowed;
+    color: gray;
+    border-color: gray;
+}
+
 
 
 input[type="number"] {
