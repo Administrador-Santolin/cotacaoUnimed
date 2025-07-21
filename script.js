@@ -531,12 +531,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (foundItem && foundItem[selectedEquipePessoal]) {
                 const cota = foundItem[selectedEquipePessoal];
-                document.getElementById('res-grupo-pessoal-resumo').textContent = grupoNamesPessoal[selectedGrupoPessoal];
+                document.getElementById('res-especialidade-pessoal-resumo').textContent = grupoNamesPessoal[selectedGrupoPessoal];
                 document.getElementById('res-importancia-pessoal-resumo').textContent = selectedImportanciaPessoal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 if(equipeNames != "sem_chefe_sem_diretor_clinico") {
                     document.getElementById('res-equipe-pessoal-resumo').textContent = equipeNames[selectedEquipePessoal];
                 }else{
-                    document.getElementById('res-premio-pessoal-resumo').classList.add('hidden'); // Esconde o prêmio se a equipe for "sem chefe sem diretor clínico"
+                    document.getElementById('resultEquipePessoal').classList.add('hidden'); // Esconde o prêmio se a equipe for "sem chefe sem diretor clínico"
                 }
                 document.getElementById('res-premio-pessoal-resumo').textContent = cota.premio_total_ano.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 document.getElementById('res-parcelamento-pessoal-resumo').textContent = cota.parcelamento_maximo_meses;
