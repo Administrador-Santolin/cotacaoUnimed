@@ -266,79 +266,13 @@ body {
 /* --- Slider Custom Styles --- */
 .slider-input {
     width: 100%;
-    height: 0.75rem; /* h-3 */
-    background-color: #e5e7eb; /* bg-gray-200 */
+    height: 0.75rem;
+    accent-color: #2563eb;
     border-radius: 0.5rem; /* rounded-lg */
-    appearance: none; /* Remove default browser styling */
-    -webkit-appearance: none;
     cursor: pointer;
     outline: none;
     margin-top: 0.5rem;
 }
-
-/* Thumb (o "círculo" que você arrasta) */
-.slider-input::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 24px; /* Maior para facilitar o toque */
-    height: 24px;
-    border-radius: 50%;
-    background-color: #3b82f6; /* accent-blue-600 */
-    border: 3px solid #ffffff; /* Borda branca */
-    cursor: grab;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-}
-
-.slider-input::-moz-range-thumb {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: #3b82f6; /* accent-blue-600 */
-    border: 3px solid #ffffff;
-    cursor: grab;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-}
-
-.slider-input:active::-webkit-slider-thumb,
-.slider-input:focus::-webkit-slider-thumb {
-    background-color: #2563eb; /* blue-700 */
-    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.4); /* Anel de foco mais pronunciado */
-}
-
-.slider-input:active::-moz-range-thumb,
-.slider-input:focus::-moz-range-thumb {
-    background-color: #2563eb; /* blue-700 */
-    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.4);
-}
-
-/* Slider track */
-.slider-input::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 0.75rem;
-    background-color: #e5e7eb;
-    border-radius: 0.5rem;
-}
-
-.slider-input::-moz-range-track {
-    width: 100%;
-    height: 0.75rem;
-    background-color: #e5e7eb;
-    border-radius: 0.5rem;
-}
-
-/* Specific colors for sliders */
-.personal-slider::-webkit-slider-thumb,
-.personal-slider::-moz-range-thumb {
-    background-color: #3b82f6; /* blue-600 */
-}
-
-.empresarial-slider::-webkit-slider-thumb,
-.empresarial-slider::-moz-range-thumb {
-    background-color: #10b981; /* green-600 */
-}
-
 
 .slider-display {
     font-weight: 700; /* font-bold */
