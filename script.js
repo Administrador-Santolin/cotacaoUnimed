@@ -533,7 +533,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cota = foundItem[selectedEquipePessoal];
                 document.getElementById('res-especialidade-pessoal-resumo').textContent = grupoNamesPessoal[selectedGrupoPessoal];
                 document.getElementById('res-importancia-pessoal-resumo').textContent = selectedImportanciaPessoal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                if(equipeNames != "sem_chefe_sem_diretor_clinico") {
+                if(selectedEquipePessoal != "sem_chefe_sem_diretor_clinico") {
+                    document.getElementById('resultEquipePessoal').classList.remove('hidden'); // Esconde o prêmio se a equipe for "sem chefe sem diretor clínico"
                     document.getElementById('res-equipe-pessoal-resumo').textContent = equipeNames[selectedEquipePessoal];
                 }else{
                     document.getElementById('resultEquipePessoal').classList.add('hidden'); // Esconde o prêmio se a equipe for "sem chefe sem diretor clínico"
