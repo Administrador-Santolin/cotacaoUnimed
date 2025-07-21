@@ -108,13 +108,25 @@ body {
 
 .stepper-line {
     position: absolute;
-    top: 50%;
+    top: 32%;
     left: 0;
     right: 0;
     height: 4px;
     background-color: #d1d5db;
     transform: translateY(-50%);
     z-index: -1;
+}
+
+.stepper-progress-line {
+    position: absolute;
+    top: 32%;
+    left: 0;
+    height: 4px;
+    background-color: #10b981;
+    transform: translateY(-50%);
+    z-index: 0;
+    width: 0%; 
+    transition: width 0.3s ease-in-out;
 }
 
 .stepper-step-item {

@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevButton = document.getElementById('prev-button');
     const nextButton = document.getElementById('next-button');
     const editCotacaoButton = document.getElementById('edit-cotacao-button');
+    const stepperProgressLine = document.getElementById('stepper-progress-line');
 
     // Elementos do Passo 1 (Tipo de Cotação)
     const tipoCotacaoRadios = document.querySelectorAll('input[name="tipo_cotacao"]');
@@ -287,6 +288,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 step.classList.remove('active', 'completed');
             }
         });
+
+        const progressPercentage = (currentStep / (totalSteps - 1) + 12) * 100;
+        if (stepperProgressLine) {
+            stepperProgressLine.style.width = `${progressPercentage}%`;
+        }
 
         // Atualiza visibilidade dos botões de navegação
         prevButton.classList.toggle('hidden', currentStep === 0);
