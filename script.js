@@ -5,23 +5,23 @@ import { planData, planDataEmpresarial, franquiaDataEmpresarial } from './planDa
 
 // Mapeamento para exibir nomes amigáveis para os tipos de equipe (Pessoal)
 const equipeNames = {
-    "sem_chefe_sem_diretor_clinico": "Sem Chefe de Equipe e Sem Diretor Clínico",
-    "com_chefe_sem_diretor_clinico": "Com Chefe de Equipe e Sem Diretor Clínico",
-    "sem_chefe_com_diretor_clinico": "Sem Chefe de Equipe e Com Diretor Clínico",
+    "sem_chefe_sem_diretor_clinico": "",
+    "com_chefe_sem_diretor_clinico": "Com Chefe de Equipe",
+    "sem_chefe_com_diretor_clinico": "Com Diretor Clínico",
     "com_chefe_com_diretor_clinico": "Com Chefe de Equipe e Com Diretor Clínico"
 };
 
 // Mapeamento para exibir nomes amigáveis para os grupos/especialidades (Pessoal)
 const grupoNamesPessoal = {
-    "G2": "G2 (Farmácia sem Estética)",
-    "G5": "G5 (Farmácia com Estética)"
+    "G2": "Farmácia sem Estética",
+    "G5": "Farmácia com Estética"
 };
 
 // Mapeamento para exibir nomes amigáveis para os grupos/tipos de instituição (Empresarial)
 const grupoNamesEmpresarial = {
-    "G1": "G1 (Farmácia sem estética)",
-    "G3": "G3 (Farmácia de Manipulação)",
-    "G6": "G6 (Farmácia com estética²)"
+    "G1": "Farmácia sem estética",
+    "G3": "Farmácia de Manipulação",
+    "G6": "Farmácia com estética"
 };
 
 // Mapeamento para exibir nomes amigáveis para quantidade de profissionais (Empresarial)
@@ -532,12 +532,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (foundItem && foundItem[selectedEquipePessoal]) {
                 const cota = foundItem[selectedEquipePessoal];
                 document.getElementById('res-grupo-pessoal-resumo').textContent = grupoNamesPessoal[selectedGrupoPessoal];
-                document.getElementById('res-especialidade-pessoal-resumo').textContent = grupoNamesPessoal[selectedGrupoPessoal].split('(')[1].replace(')', '');
                 document.getElementById('res-importancia-pessoal-resumo').textContent = selectedImportanciaPessoal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                document.getElementById('res-equipe-pessoal-resumo').textContent = equipeNames[selectedEquipePessoal];
+                if(equipeNames != "sem_chefe_sem_diretor_clinico") {
+                    document.getElementById('res-equipe-pessoal-resumo').textContent = equipeNames[selectedEquipePessoal];
+                }else{
+                    document.getElementById('res-premio-pessoal-resumo').classList.add('hidden'); // Esconde o prêmio se a equipe for "sem chefe sem diretor clínico"
+                }
                 document.getElementById('res-premio-pessoal-resumo').textContent = cota.premio_total_ano.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 document.getElementById('res-parcelamento-pessoal-resumo').textContent = cota.parcelamento_maximo_meses;
-                document.getElementById('res-condicao-pessoal-resumo').textContent = cota.parcela_minima_condicao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 resultadoPessoalDiv.classList.remove('hidden');
             } else {
                 showMessage('Não foi possível gerar o resumo da Cotação Pessoal. Verifique os dados preenchidos.', 'error');
@@ -555,7 +557,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const foundFranquia = franquiaDataEmpresarial.find(item => item.lmg === selectedLMGEmpresarial);
 
             if (foundItem) {
-                document.getElementById('res-grupo-empresarial-resumo').textContent = grupoNamesEmpresarial[selectedGrupoEmpresarial];
                 document.getElementById('res-tipo-instituicao-empresarial-resumo').textContent = foundItem.tipo_instituicao;
                 document.getElementById('res-profissionais-empresarial-resumo').textContent = profissionaisNamesEmpresarial[selectedProfissionaisEmpresarial];
                 document.getElementById('res-lmg-empresarial-resumo').textContent = selectedLMGEmpresarial.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
