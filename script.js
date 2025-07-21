@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        const progressPercentage = (currentStep / (totalSteps - 1)) * 100;
+        const progressPercentage = (currentStep / (totalSteps)) * 100;
         if (stepperProgressLine) {
             stepperProgressLine.style.width = `${progressPercentage+12}%`;
         }
