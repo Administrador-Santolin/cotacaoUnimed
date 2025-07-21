@@ -289,9 +289,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        const progressPercentage = (currentStep / (totalSteps - 1) + 12) * 100;
+        const progressPercentage = (currentStep / (totalSteps - 1)) * 100;
         if (stepperProgressLine) {
-            stepperProgressLine.style.width = `${progressPercentage}%`;
+            stepperProgressLine.style.width = `${progressPercentage+12}%`;
         }
 
         // Atualiza visibilidade dos botões de navegação
