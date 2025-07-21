@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const razaoSocialEmpresarialInput = document.getElementById('businessName');
     const cnpjEmpresarialInput = document.getElementById('CNPJ');
+    const faturamentoBrutoEmpresarialInput = document.getElementById('faturamento-bruto-empresarial');
     const telefoneEmpresarialInput = document.getElementById('businessTel');
     const cepEmpresarialInput = document.getElementById('businessCep');
     const enderecoEmpresarialInput = document.getElementById('businessAddress');
@@ -83,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Pessoal
     const importanciaSliderPessoal = document.getElementById('importancia-slider-pessoal');
     const importanciaDisplayPessoal = document.getElementById('importancia-display-pessoal');
-    
+
 
     // Empresarial
     const lmgSliderEmpresarial = document.getElementById('lmg-slider-empresarial');
@@ -138,6 +139,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const diffToUpper = Math.abs(currentValue - upperBound);
 
         return (diffToLower <= diffToUpper) ? lowerBound : upperBound;
+    }
+
+    // Nova função de máscara para valor monetário (R$)
+    function applyCurrencyMask(value) {
+        value = value.replace(/\D/g, ''); // Remove tudo que não é dígito
+        value = value.replace(/(\d)(\d{2})$/, '$1,$2'); // Coloca a vírgula antes dos 2 últimos dígitos
+        value = value.replace(/(?=(\d{3})+(\D))\B/g, '.'); // Coloca pontos a cada 3 dígitos
+        return 'R$ ' + value;
     }
 
 
@@ -515,7 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Slider de LMG Empresarial configurado.');
     }
 
-     function displaySummary() {
+    function displaySummary() {
         const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
         hideAllResults(); // Esconde ambos os resultados antes de exibir o correto
 
@@ -533,10 +542,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cota = foundItem[selectedEquipePessoal];
                 document.getElementById('res-especialidade-pessoal-resumo').textContent = grupoNamesPessoal[selectedGrupoPessoal];
                 document.getElementById('res-importancia-pessoal-resumo').textContent = selectedImportanciaPessoal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                if(selectedEquipePessoal != "sem_chefe_sem_diretor_clinico") {
+                if (selectedEquipePessoal != "sem_chefe_sem_diretor_clinico") {
                     document.getElementById('resultEquipePessoal').classList.remove('hidden'); // Esconde o prêmio se a equipe for "sem chefe sem diretor clínico"
                     document.getElementById('res-equipe-pessoal-resumo').textContent = equipeNames[selectedEquipePessoal];
-                }else{
+                } else {
                     document.getElementById('resultEquipePessoal').classList.add('hidden'); // Esconde o prêmio se a equipe for "sem chefe sem diretor clínico"
                 }
                 document.getElementById('res-premio-pessoal-resumo').textContent = cota.premio_total_ano.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -559,6 +568,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (foundItem) {
                 document.getElementById('res-tipo-instituicao-empresarial-resumo').textContent = foundItem.tipo_instituicao;
+                document.getElementById('res-faturamento-bruto-empresarial-resumo').textContent = faturamentoBrutoEmpresarialInput.value;
                 document.getElementById('res-profissionais-empresarial-resumo').textContent = profissionaisNamesEmpresarial[selectedProfissionaisEmpresarial];
                 document.getElementById('res-lmg-empresarial-resumo').textContent = selectedLMGEmpresarial.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 document.getElementById('res-premio-empresarial-resumo').textContent = foundItem.premio_a_vista.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -604,6 +614,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cpfPessoalInput.addEventListener('input', (e) => e.target.value = applyCpfMask(e.target.value));
     cnpjEmpresarialInput.addEventListener('input', (e) => e.target.value = applyCnpjMask(e.target.value));
+    faturamentoBrutoEmpresarialInput.addEventListener('input', (e) => e.target.value = applyCurrencyMask(e.target.value));
     telefonePessoalInput.addEventListener('input', (e) => e.target.value = applyPhoneMask(e.target.value));
     telefoneEmpresarialInput.addEventListener('input', (e) => e.target.value = applyPhoneMask(e.target.value));
     cepPessoalInput.addEventListener('input', (e) => e.target.value = applyCepMask(e.target.value));

@@ -133,7 +133,7 @@
                     <legend>Dados da Empresa</legend>
 
                     <div class="row">
-                        <div class="input-container col-sm-9">
+                        <div class="input-container col-sm-5">
                             <label for="businessName">Nome da Empresa:</label>
                             <input type="text" name="businessName" id="businessName">
                         </div>
@@ -141,6 +141,13 @@
                         <div class="input-container col-sm-3">
                             <label for="CNPJ">CNPJ:</label>
                             <input type="text" name="CNPJ" id="CNPJ">
+                        </div>
+
+                        <div class="input-container col-sm-4">
+                            <label for="faturamento-bruto-empresarial" class="input-label">Faturamento Bruto (últimos 12
+                                meses):</label>
+                            <input type="text" id="faturamento-bruto-empresarial" name="faturamento_bruto_empresarial"
+                                class="input-field" placeholder="R$ 0,00">
                         </div>
                     </div>
 
@@ -274,8 +281,8 @@
                                 class="font-bold text-blue-600">R$
                                 100.000,00</span>
                         </label><br>
-                        <input type="range" id="importancia-slider-pessoal" class="slider-input"
-                            min="100000" max="1000000" step="1">
+                        <input type="range" id="importancia-slider-pessoal" class="slider-input" min="100000"
+                            max="1000000" step="1">
                     </div>
                 </fieldset>
 
@@ -344,8 +351,8 @@
                             Limite Máximo de Garantia (LMG): <span id="lmg-display-empresarial"
                                 class="font-bold text-blue-600">R$ 60.000,00</span>
                         </label><br>
-                        <input type="range" id="lmg-slider-empresarial" class="slider-input"
-                            min="60000" max="1000000" step="1">
+                        <input type="range" id="lmg-slider-empresarial" class="slider-input" min="60000" max="1000000"
+                            step="1">
                     </div>
 
                 </fieldset>
@@ -361,8 +368,8 @@
                             id="res-especialidade-pessoal-resumo"></span></p>
                     <p class="result-item"><strong class="personal-strong">Importância Segurada:</strong> <span
                             id="res-importancia-pessoal-resumo"></span></p>
-                    <p class="result-item" id="resultEquipePessoal"><strong class="personal-strong">Tipo de Equipe:</strong> <span
-                            id="res-equipe-pessoal-resumo"></span></p>
+                    <p class="result-item" id="resultEquipePessoal"><strong class="personal-strong">Tipo de
+                            Equipe:</strong> <span id="res-equipe-pessoal-resumo"></span></p>
                     <p class="result-total"><strong class="personal-strong">Prêmio Total Anual:</strong> <span
                             id="res-premio-pessoal-resumo"></span></p>
                     <p class="result-item"><strong class="personal-strong">Parcelamento Máximo:</strong> <span
@@ -375,6 +382,8 @@
                     <h3 class="result-title empresarial-color">Resultado da Cotação Empresarial:</h3>
                     <p class="result-item"><strong class="empresarial-strong">Tipo de Instituição:</strong> <span
                             id="res-tipo-instituicao-empresarial-resumo"></span></p>
+                    <p class="result-item"><strong class="empresarial-strong">Faturamento Bruto:</strong> <span
+                            id="res-faturamento-bruto-empresarial-resumo"></span></p>
                     <p class="result-item"><strong class="empresarial-strong">Quantidade de Profissionais:</strong>
                         <span id="res-profissionais-empresarial-resumo"></span>
                     </p>
