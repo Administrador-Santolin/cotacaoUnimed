@@ -117,6 +117,15 @@ body {
     z-index: -1;
 }
 
+p.condicaoPreco {
+    text-align: left;
+    border: 1px solid rgba(94, 63, 30, 0.7294117647);
+    margin: 10px 0px;
+    border-radius: 8px;
+    background: #f4efdc !important;
+    padding: 10px;
+}
+
 .stepper-progress-line {
     position: absolute;
     top: 32%;

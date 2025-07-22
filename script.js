@@ -554,7 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     document.getElementById('resultEquipePessoal').classList.add('hidden'); // Esconde o prêmio se a equipe for "sem chefe sem diretor clínico"
                 }
-                document.getElementById('res-premio-pessoal-resumo').textContent = cota.premio_total_ano.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + "*";
+                document.getElementById('res-premio-pessoal-resumo').textContent = cota.premio_total_ano.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + "**";
                 document.getElementById('res-parcelamento-pessoal-resumo').textContent = cota.parcelamento_maximo_meses;
                 document.getElementById
                 resultadoPessoalDiv.classList.remove('hidden');
@@ -578,7 +578,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('res-faturamento-bruto-empresarial-resumo').textContent = faturamentoBrutoEmpresarialInput.value;
                 document.getElementById('res-profissionais-empresarial-resumo').textContent = profissionaisNamesEmpresarial[selectedProfissionaisEmpresarial];
                 document.getElementById('res-lmg-empresarial-resumo').textContent = selectedLMGEmpresarial.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                document.getElementById('res-premio-empresarial-resumo').textContent = foundItem.premio_a_vista.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + "*";
+                document.getElementById('res-premio-empresarial-resumo').textContent = foundItem.premio_a_vista.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + "**";
                 document.getElementById('res-franquia-empresarial-resumo').textContent = foundFranquia ? foundFranquia.franquia_texto : 'Não disponível';
                 resultadoEmpresarialDiv.classList.remove('hidden');
             } else {
