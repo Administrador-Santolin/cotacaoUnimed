@@ -1,6 +1,3 @@
-// script.js
-
-// Importa os dados da planilha de um arquivo separado
 import { planData, planDataEmpresarial, franquiaDataEmpresarial } from './planData.js';
 
 // Mapeamento para exibir nomes amigáveis para os tipos de equipe (Pessoal)
@@ -42,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formEmpresarial = document.getElementById('form-empresarial');
     const messageBox = document.getElementById('message-box');
 
-    const stepperSteps = document.querySelectorAll('.stepper-step-item'); // Alterado para .stepper-step-item
+    const stepperSteps = document.querySelectorAll('.stepper-step-item');
     const formSteps = document.querySelectorAll('.form-step');
     const prevButton = document.getElementById('prev-button');
     const nextButton = document.getElementById('next-button');
@@ -95,14 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultadoPessoalDiv = document.getElementById('resultado-pessoal');
     const resultadoEmpresarialDiv = document.getElementById('resultado-empresarial');
 
-    let validImportanciasPessoal = []; // Valores válidos para slider Pessoal
-    let validLMGsEmpresarial = []; // Valores válidos para slider Empresarial
+    let validImportanciasPessoal = [];
+    let validLMGsEmpresarial = [];
 
     // --- Funções Auxiliares ---
     function showMessage(message, type = 'warning') {
         messageBox.textContent = message;
         messageBox.className = `mt-4 p-4 rounded-md ${type === 'error' ? 'bg-red-100 border-red-400 text-red-800' : 'bg-yellow-100 border-yellow-400 text-yellow-800'} block`;
-        resultadoPessoalDiv.classList.add('hidden'); // Esconde ambos os resultados ao mostrar mensagem
+        resultadoPessoalDiv.classList.add('hidden');
         resultadoEmpresarialDiv.classList.add('hidden');
         console.log('Mensagem exibida:', message);
     }
@@ -144,9 +141,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Nova função de máscara para valor monetário (R$)
     function applyCurrencyMask(value) {
-        value = value.replace(/\D/g, ''); // Remove tudo que não é dígito
-        value = value.replace(/(\d)(\d{2})$/, '$1,$2'); // Coloca a vírgula antes dos 2 últimos dígitos
-        value = value.replace(/(?=(\d{3})+(\D))\B/g, '.'); // Coloca pontos a cada 3 dígitos
+        value = value.replace(/\D/g, ''); 
+        value = value.replace(/(\d)(\d{2})$/, '$1,$2'); 
+        value = value.replace(/(?=(\d{3})+(\D))\B/g, '.'); 
         return 'R$ ' + value;
     }
 
@@ -175,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function applyCpfMask(value) {
-        value = value.replace(/\D/g, ""); // Remove tudo que não é dígito
+        value = value.replace(/\D/g, ""); 
         if (value.length > 9) {
             value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, "$1.$2.$3-$4");
         } else if (value.length > 6) {
@@ -187,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function applyCnpjMask(value) {
-        value = value.replace(/\D/g, ""); // Remove tudo que não é dígito
+        value = value.replace(/\D/g, "");
         if (value.length > 12) {
             value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2}).*/, "$1.$2.$3/$4-$5");
         } else if (value.length > 8) {
@@ -201,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function applyPhoneMask(value) {
-        value = value.replace(/\D/g, ""); // Remove tudo que não é dígito
+        value = value.replace(/\D/g, "");
         if (value.length > 10) { // (XX) XXXXX-XXXX (11 dígitos)
             value = value.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
         } else if (value.length > 5) { // (XX) XXXX-XXXX (10 dígitos) ou (XX) XXXX-XXXX (9 dígitos)
@@ -213,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function applyCepMask(value) {
-        value = value.replace(/\D/g, ""); // Remove tudo que não é dígito
+        value = value.replace(/\D/g, "");
         if (value.length > 5) {
             value = value.replace(/^(\d{5})(\d{3}).*/, "$1-$2");
         }
@@ -232,7 +229,6 @@ document.addEventListener('DOMContentLoaded', () => {
         estadoInput.value = '';
 
         if (cep.length !== 8) {
-            // showMessage('CEP inválido. Por favor, digite 8 dígitos.', 'warning');
             return; // Não busca se o CEP não tem 8 dígitos
         }
 
@@ -248,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (data.erro) {
                 showMessage('CEP não encontrado. Verifique o número digitado.', 'error');
-                enderecoInput.readOnly = false; // Permite edição manual se não encontrado
+                enderecoInput.readOnly = false;
                 bairroInput.readOnly = false;
                 cidadeInput.readOnly = false;
                 estadoInput.readOnly = false;
@@ -263,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!data.bairro) bairroInput.readOnly = false;
                 if (!data.localidade) cidadeInput.readOnly = false;
                 if (!data.uf) estadoInput.readOnly = false;
-                hideMessage(); // Esconde mensagem de erro se a busca foi bem-sucedida
+                hideMessage();
             }
         } catch (error) {
             console.error('Erro ao buscar CEP:', error);
@@ -297,10 +293,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Atualiza visibilidade dos botões de navegação
         prevButton.classList.toggle('hidden', currentStep === 0);
         nextButton.classList.toggle('hidden', currentStep === totalSteps - 1);
-        editCotacaoButton.classList.toggle('hidden', currentStep !== totalSteps - 1); // Mostra "Editar" apenas no resumo
+        editCotacaoButton.classList.toggle('hidden', currentStep !== totalSteps - 1);
 
         // Altera o texto do botão "Próximo" para "Finalizar" no penúltimo passo
-        if (currentStep === totalSteps - 2) { // Penúltimo passo (antes do resumo)
+        if (currentStep === totalSteps - 2) { 
             nextButton.textContent = 'Finalizar Cotação';
         } else {
             nextButton.textContent = 'Próximo';
@@ -313,8 +309,8 @@ document.addEventListener('DOMContentLoaded', () => {
             stepElement.classList.toggle('hidden', index !== stepIndex);
         });
         updateStepperUI();
-        hideMessage(); // Sempre esconde a mensagem ao mudar de passo
-        hideAllResults(); // Esconde resultados ao mudar de passo
+        hideMessage(); 
+        hideAllResults(); 
 
         // Lógica específica para o Passo 2 (Dados Pessoais/Empresariais)
         if (stepIndex === 1) {
@@ -346,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Valida o passo atual antes de avançar
     function validateStep(stepIndex) {
-        hideMessage(); // Limpa mensagens anteriores
+        hideMessage();
 
         let isValid = true;
         let errorMessage = '';
@@ -373,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 errorMessage = 'Tipo de cotação não selecionado no passo anterior.';
                 isValid = false;
             }
-        } else if (stepIndex === 2) { // Validação do Passo 3: Detalhes da Cotação
+        } else if (stepIndex === 2) {
             const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
             if (selectedType === 'pessoal') {
                 const selectedGrupoPessoal = document.querySelector('input[name="grupo_pessoal"]:checked');
@@ -401,8 +397,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return isValid;
     }
 
-    // --- Navegação do Stepper ---
-
     prevButton.addEventListener('click', () => {
         if (currentStep > 0) {
             currentStep--;
@@ -425,8 +419,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Não reseta os inputs aqui, apenas permite a edição.
         // O reset acontece apenas se o tipo de cotação for alterado no Passo 1.
     });
-
-    // --- Lógica de Reset de Formulários ---
 
     // Função para resetar todos os inputs de um formulário
     function resetFormFields(formElement) {
@@ -478,8 +470,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     formCotacaoEmpresarial.classList.remove('hidden');
                 }
             }
-            hideAllResults(); // Esconde resultados ao trocar o tipo de cotação
-            hideMessage(); // Esconde mensagens
+            hideAllResults(); 
+            hideMessage(); 
         });
     });
 
@@ -493,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         importanciaSliderPessoal.min = minImportancia;
         importanciaSliderPessoal.max = maxImportancia;
-        importanciaSliderPessoal.step = 1; // Snapping handled by JS
+        importanciaSliderPessoal.step = 1;
 
         importanciaSliderPessoal.value = minImportancia;
         importanciaDisplayPessoal.textContent = parseFloat(importanciaSliderPessoal.value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -516,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         lmgSliderEmpresarial.min = minLMG;
         lmgSliderEmpresarial.max = maxLMG;
-        lmgSliderEmpresarial.step = 1; // Snapping handled by JS
+        lmgSliderEmpresarial.step = 1; 
 
         lmgSliderEmpresarial.value = minLMG;
         lmgDisplayEmpresarial.textContent = parseFloat(lmgSliderEmpresarial.value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -532,7 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displaySummary() {
         const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
-        hideAllResults(); // Esconde ambos os resultados antes de exibir o correto
+        hideAllResults(); 
 
         if (selectedType === 'pessoal') {
             const selectedGrupoPessoal = document.querySelector('input[name="grupo_pessoal"]:checked')?.value;
@@ -549,10 +541,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('res-especialidade-pessoal-resumo').textContent = grupoNamesPessoal[selectedGrupoPessoal];
                 document.getElementById('res-importancia-pessoal-resumo').textContent = selectedImportanciaPessoal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 if (selectedEquipePessoal != "sem_chefe_sem_diretor_clinico") {
-                    document.getElementById('resultEquipePessoal').classList.remove('hidden'); // Esconde o prêmio se a equipe for "sem chefe sem diretor clínico"
+                    document.getElementById('resultEquipePessoal').classList.remove('hidden'); 
                     document.getElementById('res-equipe-pessoal-resumo').textContent = equipeNames[selectedEquipePessoal];
                 } else {
-                    document.getElementById('resultEquipePessoal').classList.add('hidden'); // Esconde o prêmio se a equipe for "sem chefe sem diretor clínico"
+                    document.getElementById('resultEquipePessoal').classList.add('hidden'); 
                 }
                 document.getElementById('res-premio-pessoal-resumo').textContent = cota.premio_total_ano.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + "**";
                 document.getElementById('res-parcelamento-pessoal-resumo').textContent = cota.parcelamento_maximo_meses;
@@ -610,14 +602,14 @@ document.addEventListener('DOMContentLoaded', () => {
     setupRadioSelection('grupo_pessoal', 'card-option');
 
     // Cotação Empresarial
-    setupRadioSelection('tipo_cotacao', 'card-option'); // Para alternar entre Pessoal/Empresarial
-    setupRadioSelection('grupo_empresarial', 'card-option'); // Assumindo que você usou 'grupo-option' ou similar
+    setupRadioSelection('tipo_cotacao', 'card-option');
+    setupRadioSelection('grupo_empresarial', 'card-option');
     setupRadioSelection('profissionais_empresarial', 'card-option');
 
     // Inicializa o formulário correto ao carregar a página
     showStep(currentStep);
-    setupImportanciaSliderPessoal(); // Inicializa o slider pessoal
-    setupLMGSliderEmpresarial(); // Inicializa o slider empresarial
+    setupImportanciaSliderPessoal();
+    setupLMGSliderEmpresarial(); 
 
     cpfPessoalInput.addEventListener('input', (e) => e.target.value = applyCpfMask(e.target.value));
     cnpjEmpresarialInput.addEventListener('input', (e) => e.target.value = applyCnpjMask(e.target.value));

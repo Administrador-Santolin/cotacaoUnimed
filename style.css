@@ -121,7 +121,7 @@ p.condicaoPreco {
     text-align: left;
     border: 1px solid rgba(94, 63, 30, 0.7294117647);
     margin: 10px 0px;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     background: #f4efdc !important;
     padding: 10px;
 }
@@ -610,7 +610,7 @@ input[type="date"] {
     }
 }
 
-input:read-only {
+input[type="text"]:read-only {
     cursor: not-allowed;
     color: gray;
     border-color: gray;
