@@ -34,7 +34,7 @@ exports.sendQuotationEmail = async (req, res) => {
   // Defina o endereço de e-mail para onde a cotação será enviada
   const TO_EMAIL = 'admin@santolinseguros.com.br'; // <-- SUBSTITUA AQUI!
   // Defina o endereço de e-mail verificado no SendGrid
-  const FROM_EMAIL = 'comercial@santolinconsultoria.com.br'; // <-- SUBSTITUA AQUI!
+  const FROM_EMAIL = 'admin@santolinseguros.com.br'; // <-- SUBSTITUA AQUI!
 
   const msg = {
     to: TO_EMAIL,
