@@ -32,7 +32,6 @@ const profissionaisNamesEmpresarial = {
 let currentStep = 0;
 const totalSteps = 4;;
 
-
 document.addEventListener('DOMContentLoaded', () => {
     // Referências aos elementos do DOM comuns
     const formPessoal = document.getElementById('form-pessoal');
@@ -82,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Pessoal
     const importanciaSliderPessoal = document.getElementById('importancia-slider-pessoal');
     const importanciaDisplayPessoal = document.getElementById('importancia-display-pessoal');
-
 
     // Empresarial
     const lmgSliderEmpresarial = document.getElementById('lmg-slider-empresarial');
@@ -146,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
         value = value.replace(/(?=(\d{3})+(\D))\B/g, '.');
         return 'R$ ' + value;
     }
-
 
     function setupRadioSelection(radioGroupName, optionClass) {
         const radios = document.querySelectorAll(`input[name="${radioGroupName}"]`);
@@ -218,7 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Integração ViaCEP ---
-
     async function fetchAddressByCep(cepInput, enderecoInput, bairroInput, cidadeInput, estadoInput) {
         const cep = cepInput.value.replace(/\D/g, ''); // Limpa o CEP
 
@@ -292,11 +288,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Atualiza visibilidade dos botões de navegação
         prevButton.classList.toggle('hidden', currentStep === 0);
-        nextButton.classList.toggle('hidden', currentStep === totalSteps - 1);
         editCotacaoButton.classList.toggle('hidden', currentStep !== totalSteps - 2);
 
         // Altera o texto do botão "Próximo" para "Finalizar" no penúltimo passo
         if (currentStep === totalSteps - 3) {
+            nextButton.textContent = 'Ver Resumo da Cotação';
+        }else if (currentStep === totalSteps - 1) {
             nextButton.textContent = 'Finalizar Cotação';
         } else {
             nextButton.textContent = 'Próximo';
@@ -404,11 +401,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    nextButton.addEventListener('click', () => {
+    nextButton.addEventListener('click', async () => {
         if (validateStep(currentStep)) {
             if (currentStep < totalSteps - 1) {
                 currentStep++;
                 showStep(currentStep);
+            }else if (currentStep === totalSteps - 1) {
+                await sendQuotationEmail();
             }
         }
     });
@@ -594,7 +593,131 @@ document.addEventListener('DOMContentLoaded', () => {
             formEmpresarial.classList.remove('hidden');
         }
         console.log('Tipo de cotação selecionado:', selectedType);
+    }
 
+    async function sendQuotationEmail() {
+        hideMessage();
+        showMessage('Enviando cotação por e-mail, por favor aguarde...', 'warning');
+
+        const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
+        let formData = {};
+        let emailSubject = '';
+        let emailBody = '';
+
+        if (selectedType === 'pessoal') {
+            // Coletar dados pessoais
+            formData = {
+                type: 'Pessoal',
+                nome: nomePessoalInput.value,
+                cpf: cpfPessoalInput.value,
+                telefone: telefonePessoalInput.value,
+                cep: cepPessoalInput.value,
+                endereco: enderecoPessoalInput.value,
+                numero: numeroPessoalInput.value,
+                complemento: complementoPessoalInput.value,
+                bairro: bairroPessoalInput.value,
+                cidade: cidadePessoalInput.value,
+                estado: estadoPessoalInput.value,
+                // Dados da cotação pessoal
+                grupo: document.querySelector('input[name="grupo_pessoal"]:checked')?.value,
+                equipe: document.querySelector('input[name="equipe_pessoal"]:checked')?.value,
+                importanciaSegurada: importanciaSliderPessoal.value,
+                premioTotalAno: document.getElementById('res-premio-pessoal-resumo').textContent,
+                parcelamentoMaximo: document.getElementById('res-parcelamento-pessoal-resumo').textContent,
+                condicaoParcelaMinima: document.getElementById('res-condicao-pessoal-resumo').textContent
+            };
+            emailSubject = `Nova Cotação Pessoal - ${formData.nome}`;
+            emailBody = `
+                Detalhes da Cotação Pessoal:
+                Nome: ${formData.nome}
+                CPF: ${formData.cpf}
+                Telefone: ${formData.telefone}
+                Endereço: ${formData.endereco}, ${formData.numero}${formData.complemento ? ' - ' + formData.complemento : ''}, ${formData.bairro}, ${formData.cidade} - ${formData.estado}, CEP: ${formData.cep}
+                Grupo: ${grupoNamesPessoal[formData.grupo]}
+                Tipo de Equipe: ${equipeNames[formData.equipe]}
+                Importância Segurada: ${parseFloat(formData.importanciaSegurada).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                Prêmio Total Anual: ${formData.premioTotalAno}
+                Parcelamento Máximo: ${formData.parcelamentoMaximo}
+                Condição de Parcela Mínima: ${formData.condicaoParcelaMinima}
+            `;
+
+        } else if (selectedType === 'empresarial') {
+            // Coletar dados empresariais
+            formData = {
+                type: 'Empresarial',
+                razaoSocial: razaoSocialEmpresarialInput.value,
+                cnpj: cnpjEmpresarialInput.value,
+                telefone: telefoneEmpresarialInput.value,
+                faturamentoBruto: faturamentoBrutoEmpresarialInput.value,
+                cep: cepEmpresarialInput.value,
+                endereco: enderecoEmpresarialInput.value,
+                numero: numeroEmpresarialInput.value,
+                complemento: complementoEmpresarialInput.value,
+                bairro: bairroEmpresarialInput.value,
+                cidade: cidadeEmpresarialInput.value,
+                estado: estadoEmpresarialInput.value,
+                // Dados da cotação empresarial
+                grupo: document.querySelector('input[name="grupo_empresarial"]:checked')?.value,
+                profissionais: document.querySelector('input[name="profissionais_empresarial"]:checked')?.value,
+                lmg: lmgSliderEmpresarial.value,
+                premioAVista: document.getElementById('res-premio-empresarial-resumo').textContent,
+                franquia: document.getElementById('res-franquia-empresarial-resumo').textContent
+            };
+            emailSubject = `Nova Cotação Empresarial - ${formData.razaoSocial}`;
+            emailBody = `
+                Detalhes da Cotação Empresarial:
+                Razão Social: ${formData.razaoSocial}
+                CNPJ: ${formData.cnpj}
+                Telefone: ${formData.telefone}
+                Faturamento Bruto: ${formData.faturamentoBruto}
+                Endereço: ${formData.endereco}, ${formData.numero}${formData.complemento ? ' - ' + formData.complemento : ''}, ${formData.bairro}, ${formData.cidade} - ${formData.estado}, CEP: ${formData.cep}
+                Grupo: ${grupoNamesEmpresarial[formData.grupo]}
+                Quantidade de Profissionais: ${profissionaisNamesEmpresarial[formData.profissionais]}
+                LMG: ${parseFloat(formData.lmg).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                Prêmio à Vista ou Até 6x Sem Juros: ${formData.premioAVista}
+                Franquia: ${formData.franquia}
+            `;
+        } else {
+            showMessage('Erro: Tipo de cotação não selecionado.', 'error');
+            return;
+        }
+
+        console.log('Dados a serem enviados:', formData);
+        console.log('Assunto do E-mail:', emailSubject);
+        console.log('Corpo do E-mail:', emailBody);
+
+        // SIMULAÇÃO DE ENVIO DE E-MAIL PARA UM BACKEND
+        try {
+            // Este é um URL de placeholder. Você precisaria de um servidor real aqui.
+            const response = await fetch('/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    subject: emailSubject,
+                    body: emailBody,
+                    formData: formData // Envia todos os dados brutos também
+                }),
+            });
+
+            if (response.ok) {
+                showMessage('Cotação enviada com sucesso! Nossa equipe entrará em contato em breve.', 'success');
+                // Opcional: Resetar todo o formulário após o envio bem-sucedido
+                // currentStep = 0;
+                // showStep(currentStep);
+                // resetFormFields(formDadosPessoais);
+                // resetFormFields(formDadosEmpresariais);
+                // resetFormFields(formCotacaoPessoal);
+                // resetFormFields(formCotacaoEmpresarial);
+            } else {
+                const errorData = await response.json();
+                showMessage(`Erro ao enviar cotação: ${errorData.message || 'Tente novamente.'}`, 'error');
+            }
+        } catch (error) {
+            console.error('Erro na requisição de envio de e-mail:', error);
+            showMessage('Erro de conexão ao enviar cotação. Verifique sua internet ou tente mais tarde.', 'error');
+        }
     }
 
     // Cotação Pessoal
