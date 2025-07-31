@@ -54,167 +54,7 @@
             </section>
 
             <!-- Formulário de Cotação Pessoal -->
-            <section id="step-3" class="form-step hidden">
-                <!-- Seleção do Tipo de Equipe como Radio Buttons Estilizados -->
-                <fieldset class="form-section" id="personalForm">
-                    <legend>Dados do Segurado:</legend>
-
-                    <div class="row">
-                        <div class="input-container col-sm-8">
-                            <label for="personalName">Nome:</label>
-                            <input type="text" id="personalName" name="personalName" required>
-                        </div>
-
-                        <div class="input-container col-sm-4">
-                            <label for="cpf">CPF:</label>
-                            <input type="text" id="cpf" name="cpf" placeholder="xxx.xxx.xxx-xx" required>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-container col-sm-4">
-                            <label for="birthDate">Data de Nascimento:</label>
-                            <input type="date" id="birthDate" name="birthDate" placeholder="DD/MM/YYYY" required>
-                        </div>
-
-                        <div class="input-container col-sm-4">
-                            <label for="personalEmail">E-mail:</label>
-                            <input type="email" id="personalEmail" name="personalEmail">
-                        </div>
-
-                        <div class="input-container col-sm-4">
-                            <label for="personalNumber">Telefone: </label>
-                            <input type="tel" name="personalNumber" id="personalNumber" placeholder="(DD) 9XXXX-XXXX">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-container col-sm-4">
-                            <label for="personalCep">CEP:</label>
-                            <input type="text" id="personalCep" name="personalCep">
-                        </div>
-
-                        <div class="input-container col-sm-8">
-                            <label for="personalAddress">Rua:</label>
-                            <input type="text" id="personalAddress" name="personalAddress">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-container col-sm-3">
-                            <label for="addressNumber">Número:</label>
-                            <input type="number" id="addressNumber" name="addressNumber">
-                        </div>
-
-                        <div class="input-container col-sm-9">
-                            <label for="addressComplement">Complemento:</label>
-                            <input type="text" id="addressComplement" name="addressComplement">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-container col-sm-6">
-                            <label for="neighborhood">Bairro:</label>
-                            <input type="text" id="neighborhood" name="neighborhood">
-                        </div>
-
-                        <div class="input-container col-sm-4">
-                            <label for="city">Cidade:</label>
-                            <input type="text" id="city" name="city">
-                        </div>
-
-                        <div class="input-container col-sm-2">
-                            <label for="state">Estado:</label>
-                            <input type="text" id="state" name="state">
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset class="form-section hidden" id="businessForm">
-                    <legend>Dados da Empresa</legend>
-
-                    <div class="row">
-                        <div class="input-container col-sm-5">
-                            <label for="businessName">Nome da Empresa:</label>
-                            <input type="text" name="businessName" id="businessName">
-                        </div>
-
-                        <div class="input-container col-sm-3">
-                            <label for="CNPJ">CNPJ:</label>
-                            <input type="text" name="CNPJ" id="CNPJ">
-                        </div>
-
-                        <div class="input-container col-sm-4">
-                            <label for="faturamento-bruto-empresarial">Faturamento Bruto (últimos 12
-                                meses):</label>
-                            <input type="text" id="faturamento-bruto-empresarial" name="faturamento_bruto_empresarial"
-                                 placeholder="R$ 0,00">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="toggleGroup col-sm-4">
-                            <span>Possui filial?</span>
-                            <label class="switch" for="filial">
-                                <input type="checkbox" id="filial" name="filial">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-
-                        <div class="input-container col-sm-4">
-                            <label for="businessTel">Telefone para contato:</label>
-                            <input type="text" name="businessTel" id="businessTel">
-                        </div>
-
-                        <div class="input-container col-sm-4">
-                            <label for="businessEmail">E-mail para contato:</label>
-                            <input type="email" name="businessEmail" id="businessEmail">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-container col-sm-4">
-                            <label for="businessCep">CEP:</label>
-                            <input type="text" id="businessCep" name="businessCep">
-                        </div>
-
-                        <div class="input-container col-sm-8">
-                            <label for="businessAddress">Rua:</label>
-                            <input type="text" id="businessAddress" name="businessAddress">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-container col-sm-3">
-                            <label for="businessAddNumber">Número:</label>
-                            <input type="number" id="businessAddNumber" name="businessAddNumber">
-                        </div>
-
-                        <div class="input-container col-sm-9">
-                            <label for="businessAddComplement">Complemento:</label>
-                            <input type="text" id="businessAddComplement" name="businessAddComplement">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="input-container col-sm-6">
-                            <label for="businessNeighborhood">Bairro:</label>
-                            <input type="text" id="businessNeighborhood" name="businessNeighborhood">
-                        </div>
-
-                        <div class="input-container col-sm-4">
-                            <label for="businessCity">Cidade:</label>
-                            <input type="text" id="businessCity" name="businessCity">
-                        </div>
-
-                        <div class="input-container col-sm-2">
-                            <label for="businessState">Estado:</label>
-                            <input type="text" id="businessState" name="businessState">
-                        </div>
-                    </div>
-
-                </fieldset>
-            </section>
+            
 
             <section id="step-1" class="form-step hidden">
                 <fieldset class="form-section" id="professionalInfo">
@@ -403,6 +243,168 @@
                 <button id="edit-cotacao-button" class="button-edit">
                     Editar Cotação
                 </button>
+            </section>
+
+            <section id="step-3" class="form-step hidden">
+                <!-- Seleção do Tipo de Equipe como Radio Buttons Estilizados -->
+                <fieldset class="form-section" id="personalForm">
+                    <legend>Dados do Segurado:</legend>
+
+                    <div class="row">
+                        <div class="input-container col-sm-8">
+                            <label for="personalName">Nome:</label>
+                            <input type="text" id="personalName" name="personalName" required>
+                        </div>
+
+                        <div class="input-container col-sm-4">
+                            <label for="cpf">CPF:</label>
+                            <input type="text" id="cpf" name="cpf" placeholder="xxx.xxx.xxx-xx" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-container col-sm-4">
+                            <label for="birthDate">Data de Nascimento:</label>
+                            <input type="date" id="birthDate" name="birthDate" placeholder="DD/MM/YYYY" required>
+                        </div>
+
+                        <div class="input-container col-sm-4">
+                            <label for="personalEmail">E-mail:</label>
+                            <input type="email" id="personalEmail" name="personalEmail">
+                        </div>
+
+                        <div class="input-container col-sm-4">
+                            <label for="personalNumber">Telefone: </label>
+                            <input type="tel" name="personalNumber" id="personalNumber" placeholder="(DD) 9XXXX-XXXX">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-container col-sm-4">
+                            <label for="personalCep">CEP:</label>
+                            <input type="text" id="personalCep" name="personalCep">
+                        </div>
+
+                        <div class="input-container col-sm-8">
+                            <label for="personalAddress">Rua:</label>
+                            <input type="text" id="personalAddress" name="personalAddress">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-container col-sm-3">
+                            <label for="addressNumber">Número:</label>
+                            <input type="number" id="addressNumber" name="addressNumber">
+                        </div>
+
+                        <div class="input-container col-sm-9">
+                            <label for="addressComplement">Complemento:</label>
+                            <input type="text" id="addressComplement" name="addressComplement">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-container col-sm-6">
+                            <label for="neighborhood">Bairro:</label>
+                            <input type="text" id="neighborhood" name="neighborhood">
+                        </div>
+
+                        <div class="input-container col-sm-4">
+                            <label for="city">Cidade:</label>
+                            <input type="text" id="city" name="city">
+                        </div>
+
+                        <div class="input-container col-sm-2">
+                            <label for="state">Estado:</label>
+                            <input type="text" id="state" name="state">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-section hidden" id="businessForm">
+                    <legend>Dados da Empresa</legend>
+
+                    <div class="row">
+                        <div class="input-container col-sm-5">
+                            <label for="businessName">Nome da Empresa:</label>
+                            <input type="text" name="businessName" id="businessName">
+                        </div>
+
+                        <div class="input-container col-sm-3">
+                            <label for="CNPJ">CNPJ:</label>
+                            <input type="text" name="CNPJ" id="CNPJ">
+                        </div>
+
+                        <div class="input-container col-sm-4">
+                            <label for="faturamento-bruto-empresarial">Faturamento Bruto (últimos 12
+                                meses):</label>
+                            <input type="text" id="faturamento-bruto-empresarial" name="faturamento_bruto_empresarial"
+                                 placeholder="R$ 0,00">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="toggleGroup col-sm-4">
+                            <span>Possui filial?</span>
+                            <label class="switch" for="filial">
+                                <input type="checkbox" id="filial" name="filial">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="input-container col-sm-4">
+                            <label for="businessTel">Telefone para contato:</label>
+                            <input type="text" name="businessTel" id="businessTel">
+                        </div>
+
+                        <div class="input-container col-sm-4">
+                            <label for="businessEmail">E-mail para contato:</label>
+                            <input type="email" name="businessEmail" id="businessEmail">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-container col-sm-4">
+                            <label for="businessCep">CEP:</label>
+                            <input type="text" id="businessCep" name="businessCep">
+                        </div>
+
+                        <div class="input-container col-sm-8">
+                            <label for="businessAddress">Rua:</label>
+                            <input type="text" id="businessAddress" name="businessAddress">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-container col-sm-3">
+                            <label for="businessAddNumber">Número:</label>
+                            <input type="number" id="businessAddNumber" name="businessAddNumber">
+                        </div>
+
+                        <div class="input-container col-sm-9">
+                            <label for="businessAddComplement">Complemento:</label>
+                            <input type="text" id="businessAddComplement" name="businessAddComplement">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-container col-sm-6">
+                            <label for="businessNeighborhood">Bairro:</label>
+                            <input type="text" id="businessNeighborhood" name="businessNeighborhood">
+                        </div>
+
+                        <div class="input-container col-sm-4">
+                            <label for="businessCity">Cidade:</label>
+                            <input type="text" id="businessCity" name="businessCity">
+                        </div>
+
+                        <div class="input-container col-sm-2">
+                            <label for="businessState">Estado:</label>
+                            <input type="text" id="businessState" name="businessState">
+                        </div>
+                    </div>
+
+                </fieldset>
             </section>
 
             <div class="navigation-buttons">
