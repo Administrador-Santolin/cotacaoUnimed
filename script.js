@@ -293,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Atualiza visibilidade dos botões de navegação
         prevButton.classList.toggle('hidden', currentStep === 0);
         nextButton.classList.toggle('hidden', currentStep === totalSteps - 1);
-        editCotacaoButton.classList.toggle('hidden', currentStep !== totalSteps - 1);
+        editCotacaoButton.classList.toggle('hidden', currentStep !== totalSteps - 2);
 
         // Altera o texto do botão "Próximo" para "Finalizar" no penúltimo passo
         if (currentStep === totalSteps - 3) {
