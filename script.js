@@ -624,7 +624,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 importanciaSegurada: importanciaSliderPessoal.value,
                 premioTotalAno: document.getElementById('res-premio-pessoal-resumo').textContent,
                 parcelamentoMaximo: document.getElementById('res-parcelamento-pessoal-resumo').textContent,
-                condicaoParcelaMinima: document.getElementById('res-condicao-pessoal-resumo').textContent
             };
             emailSubject = `Nova Cotação Pessoal - ${formData.nome}`;
             emailBody = `
@@ -638,7 +637,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 Importância Segurada: ${parseFloat(formData.importanciaSegurada).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                 Prêmio Total Anual: ${formData.premioTotalAno}
                 Parcelamento Máximo: ${formData.parcelamentoMaximo}
-                Condição de Parcela Mínima: ${formData.condicaoParcelaMinima}
             `;
 
         } else if (selectedType === 'empresarial') {
