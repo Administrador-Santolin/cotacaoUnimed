@@ -41,9 +41,6 @@ exports.sendQuotationEmail = async (req, res) => {
     from: FROM_EMAIL, // Must be a verified sender
     subject: subject,
     text: body, // Corpo do e-mail em texto simples
-    html: `<strong>${body.replace(/\n/g, '<br>')}</strong><br><br>
-           <p>--- Dados Detalhados ---</p>
-           <pre>${JSON.stringify(formData, null, 2)}</pre>`, // Corpo do e-mail em HTML
   };
 
   try {
