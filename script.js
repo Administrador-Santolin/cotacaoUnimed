@@ -353,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 errorMessage = 'Por favor, selecione o tipo de cotação (Pessoal ou Empresarial).';
                 isValid = false;
             }
-        } else if (stepIndex === 1) { // Validação do Passo 2: Dados Pessoais/Empresariais
+        } else if (stepIndex === 3) { // Validação do Passo 2: Dados Pessoais/Empresariais
             const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
             if (selectedType === 'pessoal') {
                 if (!nomePessoalInput.value.trim() || !cpfPessoalInput.value.trim()) {
@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 errorMessage = 'Tipo de cotação não selecionado no passo anterior.';
                 isValid = false;
             }
-        } else if (stepIndex === 2) {
+        } else if (stepIndex === 1) {
             const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
             if (selectedType === 'pessoal') {
                 const selectedGrupoPessoal = document.querySelector('input[name="grupo_pessoal"]:checked');
