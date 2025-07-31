@@ -141,9 +141,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Nova função de máscara para valor monetário (R$)
     function applyCurrencyMask(value) {
-        value = value.replace(/\D/g, ''); 
-        value = value.replace(/(\d)(\d{2})$/, '$1,$2'); 
-        value = value.replace(/(?=(\d{3})+(\D))\B/g, '.'); 
+        value = value.replace(/\D/g, '');
+        value = value.replace(/(\d)(\d{2})$/, '$1,$2');
+        value = value.replace(/(?=(\d{3})+(\D))\B/g, '.');
         return 'R$ ' + value;
     }
 
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function applyCpfMask(value) {
-        value = value.replace(/\D/g, ""); 
+        value = value.replace(/\D/g, "");
         if (value.length > 9) {
             value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, "$1.$2.$3-$4");
         } else if (value.length > 6) {
@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const progressPercentage = (currentStep / (totalSteps)) * 100;
         if (stepperProgressLine) {
-            stepperProgressLine.style.width = `${progressPercentage+12}%`;
+            stepperProgressLine.style.width = `${progressPercentage + 12}%`;
         }
 
         // Atualiza visibilidade dos botões de navegação
@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
         editCotacaoButton.classList.toggle('hidden', currentStep !== totalSteps - 1);
 
         // Altera o texto do botão "Próximo" para "Finalizar" no penúltimo passo
-        if (currentStep === totalSteps - 2) { 
+        if (currentStep === totalSteps - 3) {
             nextButton.textContent = 'Finalizar Cotação';
         } else {
             nextButton.textContent = 'Próximo';
@@ -309,22 +309,11 @@ document.addEventListener('DOMContentLoaded', () => {
             stepElement.classList.toggle('hidden', index !== stepIndex);
         });
         updateStepperUI();
-        hideMessage(); 
-        hideAllResults(); 
+        hideMessage();
+        hideAllResults();
 
         // Lógica específica para o Passo 2 (Dados Pessoais/Empresariais)
         if (stepIndex === 1) {
-            const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
-            if (selectedType === 'pessoal') {
-                formDadosPessoais.classList.remove('hidden');
-                formDadosEmpresariais.classList.add('hidden');
-            } else if (selectedType === 'empresarial') {
-                formDadosPessoais.classList.add('hidden');
-                formDadosEmpresariais.classList.remove('hidden');
-            }
-        }
-        // Lógica específica para o Passo 3 (Detalhes da Cotação)
-        else if (stepIndex === 2) {
             const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
             if (selectedType === 'pessoal') {
                 formCotacaoPessoal.classList.remove('hidden');
@@ -334,9 +323,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 formCotacaoEmpresarial.classList.remove('hidden');
             }
         }
+        // Lógica específica para o Passo 3 (Detalhes da Cotação)
+        else if (stepIndex === 2) {
+            displaySummary(); // Chama a função para exibir o resumo     
+        }
         // Lógica específica para o Passo 4 (Resumo)
         else if (stepIndex === 3) {
-            displaySummary(); // Chama a função para exibir o resumo
+            const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
+            if (selectedType === 'pessoal') {
+                formDadosPessoais.classList.remove('hidden');
+                formDadosEmpresariais.classList.add('hidden');
+            } else if (selectedType === 'empresarial') {
+                formDadosPessoais.classList.add('hidden');
+                formDadosEmpresariais.classList.remove('hidden');
+            }
         }
     }
 
@@ -414,7 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     editCotacaoButton.addEventListener('click', () => {
-        currentStep = 2; // Volta para o primeiro passo para edição
+        currentStep = 1; // Volta para o primeiro passo para edição
         showStep(currentStep);
         // Não reseta os inputs aqui, apenas permite a edição.
         // O reset acontece apenas se o tipo de cotação for alterado no Passo 1.
@@ -453,7 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Atualiza a visibilidade dos sub-formulários no Passo 2 e Passo 3
             const selectedType = event.target.value;
-            if (currentStep === 1) { // Se estiver no passo de dados pessoais/empresariais
+            if (currentStep === 3) { // Se estiver no passo de dados pessoais/empresariais
                 if (selectedType === 'pessoal') {
                     formDadosPessoais.classList.remove('hidden');
                     formDadosEmpresariais.classList.add('hidden');
@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     formDadosPessoais.classList.add('hidden');
                     formDadosEmpresariais.classList.remove('hidden');
                 }
-            } else if (currentStep === 2) { // Se estiver no passo de detalhes da cotação
+            } else if (currentStep === 1) { // Se estiver no passo de detalhes da cotação
                 if (selectedType === 'pessoal') {
                     formCotacaoPessoal.classList.remove('hidden');
                     formCotacaoEmpresarial.classList.add('hidden');
@@ -470,8 +470,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     formCotacaoEmpresarial.classList.remove('hidden');
                 }
             }
-            hideAllResults(); 
-            hideMessage(); 
+            hideAllResults();
+            hideMessage();
         });
     });
 
@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         lmgSliderEmpresarial.min = minLMG;
         lmgSliderEmpresarial.max = maxLMG;
-        lmgSliderEmpresarial.step = 1; 
+        lmgSliderEmpresarial.step = 1;
 
         lmgSliderEmpresarial.value = minLMG;
         lmgDisplayEmpresarial.textContent = parseFloat(lmgSliderEmpresarial.value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -524,7 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displaySummary() {
         const selectedType = document.querySelector('input[name="tipo_cotacao"]:checked')?.value;
-        hideAllResults(); 
+        hideAllResults();
 
         if (selectedType === 'pessoal') {
             const selectedGrupoPessoal = document.querySelector('input[name="grupo_pessoal"]:checked')?.value;
@@ -541,10 +541,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('res-especialidade-pessoal-resumo').textContent = grupoNamesPessoal[selectedGrupoPessoal];
                 document.getElementById('res-importancia-pessoal-resumo').textContent = selectedImportanciaPessoal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 if (selectedEquipePessoal != "sem_chefe_sem_diretor_clinico") {
-                    document.getElementById('resultEquipePessoal').classList.remove('hidden'); 
+                    document.getElementById('resultEquipePessoal').classList.remove('hidden');
                     document.getElementById('res-equipe-pessoal-resumo').textContent = equipeNames[selectedEquipePessoal];
                 } else {
-                    document.getElementById('resultEquipePessoal').classList.add('hidden'); 
+                    document.getElementById('resultEquipePessoal').classList.add('hidden');
                 }
                 document.getElementById('res-premio-pessoal-resumo').textContent = cota.premio_total_ano.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + "**";
                 document.getElementById('res-parcelamento-pessoal-resumo').textContent = cota.parcelamento_maximo_meses;
@@ -609,7 +609,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inicializa o formulário correto ao carregar a página
     showStep(currentStep);
     setupImportanciaSliderPessoal();
-    setupLMGSliderEmpresarial(); 
+    setupLMGSliderEmpresarial();
 
     cpfPessoalInput.addEventListener('input', (e) => e.target.value = applyCpfMask(e.target.value));
     cnpjEmpresarialInput.addEventListener('input', (e) => e.target.value = applyCnpjMask(e.target.value));
