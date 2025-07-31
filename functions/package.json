@@ -1,0 +1,14 @@
+{
+  "name": "send-quotation-email",
+  "version": "1.0.0",
+  "description": "Google Cloud Function to send quotation emails using SendGrid.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0"
+  }
+}
