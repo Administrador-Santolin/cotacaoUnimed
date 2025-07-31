@@ -684,10 +684,12 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Assunto do E-mail:', emailSubject);
         console.log('Corpo do E-mail:', emailBody);
 
+        const cloudFunctionURL = 'https://us-central1-soumedico.cloudfunctions.net/sendQuotationEmail';
+
         // SIMULAÇÃO DE ENVIO DE E-MAIL PARA UM BACKEND
         try {
             // Este é um URL de placeholder. Você precisaria de um servidor real aqui.
-            const response = await fetch('/send-email', {
+            const response = await fetch(cloudFunctionURL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
