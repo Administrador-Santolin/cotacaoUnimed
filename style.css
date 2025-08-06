@@ -483,7 +483,7 @@ legend {
 .toggleGroup {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: end;
 }
 
 .switch {
@@ -608,6 +608,7 @@ input[type="date"] {
     border: 1px solid black;
     outline: none;
     transition: all .3s ease-in-out;
+    border-radius: 8px;
 
     &:focus {
         border: 2px solid #007bff;
