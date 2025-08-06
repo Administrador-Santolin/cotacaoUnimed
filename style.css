@@ -583,7 +583,7 @@ legend {
 
     & label {
         margin-top: .5rem;
-        margin-bottom: none;
+        margin-bottom: 0px !important;
     }
 
     &:focus-within label {
